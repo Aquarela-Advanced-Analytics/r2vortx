@@ -2,8 +2,7 @@
 R codes to allow connecting your data to VORTX machinelearning plataform. 
 
 
-#Changes via Rstudio
+## API - Information
 
-Testing pull requests v3.
+All api address of VORTX can be found at api.vortx.io
 
-Testing pull request v4.
