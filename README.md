@@ -11,7 +11,21 @@ All api addresses of VORTX can be found at api.vortx.io
 
 Contributors of this project should get in touch to get over Github to get the APIkeys. 
 
+## How VORTX works with spreadsheets? 
+
+Here is a simple video showing its operation - https://www.youtube.com/watch?v=jifOmAX4-qI
+
+
 ## Projetct Dictionary
+
+### LICENSE
+Just the descriptions of the adopted Licese for this code. 
+
+### README.MD 
+They said we have to have it, so we have it.
+
+### r2vortx.Rproj 
+Local Rstudio project
 
 ### R
 The R directory contains various files with function definitions (but only function definitions - no code that actually runs). The code itself should be on the root directory. 
@@ -28,4 +42,7 @@ The figs directory contains the figures. This directory only contains generated 
 ### Outputs
 Files that resulted from the processing including logs, simuation output, processed datasets, logs, or other processed things.
 
+## More information
+
+Follow us at www.aquare.la 
 
