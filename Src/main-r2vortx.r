@@ -12,24 +12,39 @@
 
 #Setting up working evnrionment
 setwd("~/r2vortx/")
+#Standard links
 urlCreateJob<-"https://api.vortx.io/jobs/create"
 urlJobStart<-"https://api.vortx.io/discoverer/start"
+
+#API-Definition
+myAPI<-"O8mXNYEUVtsrixVsH8fiTcHhHkEb9gMRo6pmbbeozS"
+
+#Job Basic Information
+#Definition of the dataset that will be add to VORTX
+fileToVORTX<-paste(getwd(),"/Data/01-wine.csv", sep = "")
 
 #It is recommended that the analysis have at least 3 parts [Type of the analytics, Dataset, Sample Size]
 jobName<-paste("Evaluation", "Wine-bottles", "178 lines", sep = " ")
 
-#Definition of the dataset that will be add to VORTX
-fileToVORTX<-paste(getwd(),"/Data/01-wine.csv", sep = "")
+#Simple Description
+jobDescription<-paste("How the Wine can be organized?", jobName," Saved at ", fileToVORTX, " Created at: ", Sys.time(), " using R script", sep = "")
 
-#API-Definition
-myAPI<-"O8mXNYEUVtsrixVsH8fiTcHhHkEb9gMRo6pmbbeozS87"
+#Preparing the bundle to send
+bodyCreateJob<-list(myAPI,jobName,jobDescription,upload_file(fileToVORTX, "text/csv"))
 
-
-#Job Basic Information
-jobDescription<-paste(
-  "What VORTX says about the Wine characterists?", jobName," Saved at ", fileToVORTX, " Created at: ", Sys.time(), " using R script", sep = "")
+reqCreateJob <- POST(url = urlCreateJob, body = bodyCreateJob,  encode = "multipart", handle = verbose())
 
 
+library(httr)
+bodyCreateJob
+content(reqCreateJob)
+return(reqCreateJob)
 
-base_de_dados_2010_2014 <- rio::import(file = "/home/j/Downloads/IBGE/base_de_dados_2010_2014.xls", which = 1L)
 
+
+print(CreateJob)
+print(myAPI)
+print(jobName)
+print(jobDescription)
+print(upload_file(fileToVORTX, "text/csv"))
+print(fileToVORTX)
