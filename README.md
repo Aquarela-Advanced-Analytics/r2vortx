@@ -46,3 +46,22 @@ Files that resulted from the processing including logs, simuation output, proces
 
 Follow us at www.aquare.la 
 
+### Current version 
+
+Herein, is what the R respondes to a "version" command on the Ubuntu Linux.
+
+platform       x86_64-pc-linux-gnu         
+arch           x86_64                      
+os             linux-gnu                   
+system         x86_64, linux-gnu           
+status                                     
+major          3                           
+minor          3.2                         
+year           2016                        
+month          10                          
+day            31                          
+svn rev        71607                       
+language       R                           
+version.string R version 3.3.2 (2016-10-31)
+nickname       Sincere Pumpkin Patch       
+
