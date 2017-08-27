@@ -10,13 +10,18 @@
 #Setup variables 
 #VORTX API Adresses
 
-setwd("~/r2tvortx/")
-getwd()
-
-getwd()
+#Setting up working evnrionment
+setwd("~/r2vortx/")
 urlCreateJob<-"https://api.vortx.io/jobs/create"
 urlJobStart<-"https://api.vortx.io/discoverer/start"
- 
+
+#It is recommended that the analysis have at least 3 parts [Type of the analytics, Dataset, Sample Size]
+jobName<-paste("Evaluation", "Wine-bottles", "178 lines", sep = " ")
+
+print(jobName)
+#
+df <- read.table("Data/01-wine.csv" ,header = T, sep = ", ")
+View(df)
 
 
 
