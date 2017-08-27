@@ -18,21 +18,16 @@ urlJobStart<-"https://api.vortx.io/discoverer/start"
 #It is recommended that the analysis have at least 3 parts [Type of the analytics, Dataset, Sample Size]
 jobName<-paste("Evaluation", "Wine-bottles", "178 lines", sep = " ")
 
-print(jobName)
-#
-df <- read.table("Data/01-wine.csv" ,header = T, sep = ", ")
-View(df)
+#Definition of the dataset that will be add to VORTX
+fileToVORTX<-paste(getwd(),"/Data/01-wine.csv", sep = "")
 
-
-
-#Job Casic Information
-sampleSize<-1000
-jobName<-paste("Comparativo2-", sampleSize, sep = "")
-fileToVORTX<-paste("~/Downloads/",jobName, ".csv", sep = "")
+#API-Definition
 myAPI<-"O8mXNYEUVtsrixVsH8fiTcHhHkEb9gMRo6pmbbeozS87"
+
+
+#Job Basic Information
 jobDescription<-paste(
-  "Find out what are the key influence factors of no-show in medical",
-  jobName," Saved at ", fileToVORTX, " Created at: ", Sys.time(), " using R script", sep = "")
+  "What VORTX says about the Wine characterists?", jobName," Saved at ", fileToVORTX, " Created at: ", Sys.time(), " using R script", sep = "")
 
 
 
