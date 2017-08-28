@@ -1,6 +1,6 @@
-#Setup 
+#Setup
 #Libraries needed to performe the operation 
-
+library(httr) #upload_file
 #This is an elegant way of calling and automatically install all necessary packages
 
 #list.of.packages <- c("janitor", "lubridate", hms)
@@ -17,27 +17,36 @@ urlCreateJob<-"https://api.vortx.io/jobs/create"
 urlJobStart<-"https://api.vortx.io/discoverer/start"
 
 #API-Definition
-myAPI<-"O8mXNYEUVtsrixVsH8fiTcHhHkEb9gMRo6pmbbeozS"
+myAPI<-"O8mXNYEUVtsrixVsH8fiTcHhHkEb9gMRo6pmbbeozS87"
 
 #Job Basic Information
 #Definition of the dataset that will be add to VORTX
-fileToVORTX<-paste(getwd(),"/Data/01-wine.csv", sep = "")
+fileToVORTX <- paste(getwd(),"/Data/01-wine.csv", sep = "")
+print(fileToVORTX)
+df <- read.csv(file=fileToVORTX, header = TRUE, sep = ",")
 
 #It is recommended that the analysis have at least 3 parts [Type of the analytics, Dataset, Sample Size]
 jobName<-paste("Evaluation", "Wine-bottles", "178 lines", sep = " ")
+jobName <- "JobName"
 
 #Simple Description
 jobDescription<-paste("How the Wine can be organized?", jobName," Saved at ", fileToVORTX, " Created at: ", Sys.time(), " using R script", sep = "")
+jobDescription<-"jobDescription"
 
-#Preparing the bundle to send
-bodyCreateJob<-list(myAPI,jobName,jobDescription,upload_file(fileToVORTX, "text/csv"))
+fileToVORTX
+csv <- upload_file(fileToVORTX, "text/csv")
 
-reqCreateJob <- POST(url = urlCreateJob, body = bodyCreateJob,  encode = "multipart", handle = verbose())
+jobBody <- list(myAPI, jobName, jobDescription, csv)
+
+reqCreateJob <- POST(url = urlCreateJob, body = jobBody, encode = "multipart", handle = verbose())
 
 
-library(httr)
-bodyCreateJob
+
+#reqCreateJob <- POST(url = urlCreateJob, body = bodyCreateJob,  encode = "multipart", handle = verbose())
 content(reqCreateJob)
+
+bodyCreateJob
+
 return(reqCreateJob)
 
 
