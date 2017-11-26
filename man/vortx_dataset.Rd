@@ -9,15 +9,9 @@ vortx_dataset(key, job)
 \arguments{
 \item{key}{String. User API Key for VORTX.}
 
-\item{job}{String or List. Can be either a job ID number 
-in string format or parsed JSON in list format, 
+\item{job}{String or List. Can be either a job ID number
+in string format or parsed JSON in list format,
 result of organizer or discoverer functions.}
-
-\item{clusternum}{Integer or String. Can be cluster number (int) or cluster name in format 'cluster-x'.}
-
-\item{start}{Integer. Starting row to get info from.}
-
-\item{end}{Integer. Ending row to get info from.}
 }
 \value{
 DataFrame of a job dataset
@@ -30,5 +24,5 @@ mykey <- '1234567890abcefghijkl'
 myjobid <- '0987654321'
 myjob <- vortx_create_job(...)
 
-> vortx_dataset(mykey, myjob)
+vortx_dataset(mykey, myjob)
 }

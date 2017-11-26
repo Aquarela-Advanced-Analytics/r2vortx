@@ -9,8 +9,8 @@ start_discoverer(key, job, target, ignoredcols = NULL)
 \arguments{
 \item{key}{String. User API Key for VORTX.}
 
-\item{job}{String or List. Can be either a job ID number 
-in string format or parsed JSON in list format, 
+\item{job}{String or List. Can be either a job ID number
+in string format or parsed JSON in list format,
 result of organizer or discoverer functions.}
 
 \item{target}{String. Name of column to be used as Target.}
@@ -28,5 +28,5 @@ mykey <- '1234567890abcefghijkl'
 myjobid <- '0987654321'
 myjob <- vortx_create_job(...)
 
-> start_discoverer(mykey, myjob, myjobname, myjobdesc)
+start_discoverer(mykey, myjob, myjobname, myjobdesc)
 }

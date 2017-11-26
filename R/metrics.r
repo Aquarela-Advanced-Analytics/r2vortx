@@ -3,16 +3,16 @@
 #' Gets metrics of clusters of job in VORTX in parsed JSON format.
 #'
 #' @param key String. User API Key for VORTX.
-#' @param job String or List. Can be either a job ID number 
-#' in string format or parsed JSON in list format, 
+#' @param job String or List. Can be either a job ID number
+#' in string format or parsed JSON in list format,
 #' result of organizer or discoverer functions.
 #' @return List of parsed JSON.
-#' @examples 
+#' @examples
 #' mykey <- '1234567890abcefghijkl'
 #' myjobid <- '0987654321'
 #' myjob <- vortx_create_job(...)
 #'
-#' > get_metrics_raw(mykey, myjob)
+#' get_metrics_raw(mykey, myjob)
 get_metrics_raw <- function(key, job){
 
   # Temporary data
@@ -31,16 +31,16 @@ get_metrics_raw <- function(key, job){
 #' Gets metrics of clusters of job in VORTX in DataFrame format
 #'
 #' @param key String. User API Key for VORTX.
-#' @param job String or List. Can be either a job ID number 
-#' in string format or parsed JSON in list format, 
+#' @param job String or List. Can be either a job ID number
+#' in string format or parsed JSON in list format,
 #' result of organizer or discoverer functions.
 #' @return DataFrame.
-#' @examples 
+#' @examples
 #' mykey <- '1234567890abcefghijkl'
 #' myjobid <- '0987654321'
 #' myjob <- vortx_create_job(...)
 #'
-#' > get_metrics(mykey, myjob)
+#' get_metrics(mykey, myjob)
 get_metrics <- function(key, job){
 
   metrics <- get_metrics_raw(key, job)

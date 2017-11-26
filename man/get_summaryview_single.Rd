@@ -9,8 +9,8 @@ get_summaryview_single(key, job, clusternum)
 \arguments{
 \item{key}{String. User API Key for VORTX.}
 
-\item{job}{String or List. Can be either a job ID number 
-in string format or parsed JSON in list format, 
+\item{job}{String or List. Can be either a job ID number
+in string format or parsed JSON in list format,
 result of organizer or discoverer functions.}
 
 \item{clusternum}{Integer or String. Can be cluster number (int) or cluster name in format 'cluster-x'.}
@@ -26,5 +26,5 @@ mykey <- '1234567890abcefghijkl'
 myjobid <- '0987654321'
 myjob <- vortx_create_job(...)
 
-> get_summaryview_single(mykey, myjob, 1)
+get_summaryview_single(mykey, myjob, 1)
 }

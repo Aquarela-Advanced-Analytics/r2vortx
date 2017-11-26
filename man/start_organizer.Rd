@@ -9,8 +9,8 @@ start_organizer(key, job, ignoredcols = NULL)
 \arguments{
 \item{key}{String. User API Key for VORTX.}
 
-\item{job}{String or List. Can be either a job ID number 
-in string format or parsed JSON in list format, 
+\item{job}{String or List. Can be either a job ID number
+in string format or parsed JSON in list format,
 result of organizer or discoverer functions.}
 
 \item{ignoredcols}{String or Vector of strings. Optional name of columns to be ignored. Default is NULL.}
@@ -26,5 +26,5 @@ mykey <- '1234567890abcefghijkl'
 myjobid <- '0987654321'
 myjob <- vortx_create_job(...)
 
-> start_organizer(mykey, myjob, 'WhateverCol')
+start_organizer(mykey, myjob, 'WhateverCol')
 }

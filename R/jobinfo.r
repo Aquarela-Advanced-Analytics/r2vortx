@@ -3,10 +3,10 @@
 #' Gets information on a VORTX job
 #'
 #' @param key String. User API Key for VORTX.
-#' @param job String or List. Can be either a job ID number 
-#' in string format or parsed JSON in list format, 
+#' @param job String or List. Can be either a job ID number
+#' in string format or parsed JSON in list format,
 #' result of organizer or discoverer functions.
-#' @param info String. Defines what kind of information to be extracted from job, 
+#' @param info String. Defines what kind of information to be extracted from job,
 #' between 'clusters', 'varscores', 'dataset' or 'summary'. Default is 'all'.
 #' @return List of DataFrames or DataFrame. If 'all' or 'summary' are defined, a list. Else specific DataFrame.
 #' @examples
@@ -14,8 +14,8 @@
 #' myjobid <- '0987654321'
 #' myjob <- vortx_create_job(...)
 #'
-#' > vortx_info(mykey, myjobid, info = 'clusters')
-#' > vortx_info(mykey, myjob)
+#' vortx_info(mykey, myjobid, info = 'clusters')
+#' vortx_info(mykey, myjob)
 vortx_info <- function(key, job, info='all'){
 
     # Temporary data

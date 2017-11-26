@@ -29,5 +29,5 @@ myjobname <- 'My job'
 myjobdesc <- 'This is a job that does job stuff'
 df <- data.frame(Survived = c(1,0,1), c(4,5,6), WhateverCol = c(7,8,9))
 
-> vortx_organizer(mykey, df, myjobname, myjobdesc, 'WhateverCol')
+vortx_organizer(mykey, df, myjobname, myjobdesc, 'WhateverCol')
 }

@@ -9,8 +9,8 @@ get_summaryview(key, job)
 \arguments{
 \item{key}{String. User API Key for VORTX.}
 
-\item{job}{String or List. Can be either a job ID number 
-in string format or parsed JSON in list format, 
+\item{job}{String or List. Can be either a job ID number
+in string format or parsed JSON in list format,
 result of organizer or discoverer functions.}
 }
 \value{
@@ -24,5 +24,5 @@ mykey <- '1234567890abcefghijkl'
 myjobid <- '0987654321'
 myjob <- vortx_create_job(...)
 
-> get_summaryview(mykey, myjob)
+get_summaryview(mykey, myjob)
 }

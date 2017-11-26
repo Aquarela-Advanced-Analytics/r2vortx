@@ -3,19 +3,19 @@
 #' Gets raw textview of job in VORTX in parsed JSON format
 #'
 #' @param key String. User API Key for VORTX.
-#' @param job String or List. Can be either a job ID number 
-#' in string format or parsed JSON in list format, 
+#' @param job String or List. Can be either a job ID number
+#' in string format or parsed JSON in list format,
 #' result of organizer or discoverer functions.
 #' @param clusternum Integer or String. Can be cluster number (int) or cluster name in format 'cluster-x'.
 #' @param start Integer. Starting row to get info from.
 #' @param end Integer. Ending row to get info from.
 #' @return List of parsed JSON.
-#' @examples 
+#' @examples
 #' mykey <- '1234567890abcefghijkl'
 #' myjobid <- '0987654321'
 #' myjob <- vortx_create_job(...)
 #'
-#' > get_textview_raw(mykey, myjob, 1, 1, 10)
+#' get_textview_raw(mykey, myjob, 1, 1, 10)
 get_textview_raw <- function(key, job, clusternum, start, end){
 
   # Temporary data
@@ -42,19 +42,19 @@ get_textview_raw <- function(key, job, clusternum, start, end){
 #' Gets dataset for a cluster of job in VORTX in DataFrame format
 #'
 #' @param key String. User API Key for VORTX.
-#' @param job String or List. Can be either a job ID number 
-#' in string format or parsed JSON in list format, 
+#' @param job String or List. Can be either a job ID number
+#' in string format or parsed JSON in list format,
 #' result of organizer or discoverer functions.
 #' @param clusternum Integer or String. Can be cluster number (int) or cluster name in format 'cluster-x'.
 #' @param start Integer. Starting row to get info from.
 #' @param end Integer. Ending row to get info from.
 #' @return DataFrame of a cluster dataset
-#' @examples 
+#' @examples
 #' mykey <- '1234567890abcefghijkl'
 #' myjobid <- '0987654321'
 #' myjob <- vortx_create_job(...)
 #'
-#' > get_dataset_single(mykey, myjob, 1, 1, 10)
+#' get_dataset_single(mykey, myjob, 1, 1, 10)
 get_dataset_single <- function(key, job, clusternum, start, end){
 
   # Get raw information
@@ -76,19 +76,16 @@ get_dataset_single <- function(key, job, clusternum, start, end){
 #' Gets full dataset of job in VORTX in DataFrame format
 #'
 #' @param key String. User API Key for VORTX.
-#' @param job String or List. Can be either a job ID number 
-#' in string format or parsed JSON in list format, 
+#' @param job String or List. Can be either a job ID number
+#' in string format or parsed JSON in list format,
 #' result of organizer or discoverer functions.
-#' @param clusternum Integer or String. Can be cluster number (int) or cluster name in format 'cluster-x'.
-#' @param start Integer. Starting row to get info from.
-#' @param end Integer. Ending row to get info from.
 #' @return DataFrame of a job dataset
-#' @examples 
+#' @examples
 #' mykey <- '1234567890abcefghijkl'
 #' myjobid <- '0987654321'
 #' myjob <- vortx_create_job(...)
 #'
-#' > vortx_dataset(mykey, myjob)
+#' vortx_dataset(mykey, myjob)
 vortx_dataset <- function(key, job){
 
   # Temporary data

@@ -7,13 +7,13 @@
 #' @param jobname String. Title of job to be created.
 #' @param jobdesc String. Description of job to be created. Optional. Default NULL.
 #' @return Job. Parsed content of API request, containing job information, such as job ID, used in other functions.
-#' @examples 
+#' @examples
 #' mykey <- '1234567890abcefghijkl'
 #' myjobname <- 'My job'
 #' myjobdesc <- 'This is a job that does job stuff'
 #' df <- data.frame(c(1,2,3), c(4,5,6), c(7,8,9))
 #'
-#' > vortx_create_job(mykey, df, myjobname, myjobdesc)
+#' vortx_create_job(mykey, df, myjobname, myjobdesc)
 vortx_create_job <- function(key, data, jobname, jobdesc=NULL){
 
   # Temporary data
