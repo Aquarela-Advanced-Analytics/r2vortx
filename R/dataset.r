@@ -121,7 +121,7 @@ vortx_dataset <- function(key, job){
     }
     i <- i + 1
   }
-  df[,'ID'] <- as.integer(as.character(df[,'ID']))
+  df[,'id'] <- as.integer(as.character(df[,'id']))
   df[,'clusterId'] <- factor(df[,'clusterId'])
 
   return(df)
