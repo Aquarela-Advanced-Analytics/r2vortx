@@ -5,6 +5,9 @@ This package aims to use Aquarela VORTX within R. Its main functions are:
  - **vortx_dataset**: Gets dataset of a processed job in VORTX.
  - **vortx_info**: Gets all available information from a processed job in VORTX.
 
+Arguments and usage can be found in the documentation. Every function requires an API Key from VORTX, 
+so it is recommended to add it as a variable in your programming environment.
+
 ## API - Information
 All api addresses of VORTX can be found at api.vortx.io 
 
