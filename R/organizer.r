@@ -58,7 +58,7 @@ start_organizer <- function(key, job, ignoredcols=NULL){
 #' vortx_organizer(mykey, df, myjobname, myjobdesc, 'WhateverCol')
 vortx_organizer <- function(key, data, jobname, jobdesc=NULL, ignoredcols=NULL){
 
-  job <- vortx_create_job(key, jobname, data, jobdesc)
+  job <- vortx_create_job(key, data, jobname, jobdesc)
   job_id <- get_job_id(job)
   organizer <- start_organizer(key, job_id, ignoredcols)
 

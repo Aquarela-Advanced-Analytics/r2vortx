@@ -61,7 +61,7 @@ start_discoverer <- function(key, job, target, ignoredcols=NULL){
 #' vortx_discoverer(mykey, df, myjobname, 'Survived', myjobdesc, 'WhateverCol')
 vortx_discoverer <- function(key, data, jobname, target, jobdesc=NULL, ignoredcols=NULL){
 
-  job <- vortx_create_job(key, jobname, data, jobdesc)
+  job <- vortx_create_job(key, data, jobname, jobdesc)
   job_id <- get_job_id(job)
   discoverer <- start_discoverer(key, job_id, target, ignoredcols)
 
