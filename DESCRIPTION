@@ -1,0 +1,14 @@
+Package: r2vortx
+Type: Package
+Title: Integrates VORTX APIs with R
+Date: 2017-11-24
+Version: 1.0
+Author: Edgar Valente
+Maintainer: Edgar Valente <edgar@aquare.la>
+Description: Makes API requests for VORTX software using user's API Key.
+    There are functions for creating, starting and getting information about jobs, so it can be done all within an R environment.
+License: MIT
+Encoding: UTF-8
+LazyData: true
+Imports: httr
+RoxygenNote: 6.0.1
