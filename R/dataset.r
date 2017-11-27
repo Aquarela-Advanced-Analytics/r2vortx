@@ -34,7 +34,7 @@ get_textview_raw <- function(key, job, clusternum, start, end){
   resp <- httr::GET(url, query = job_body)
   textview <- httr::content(resp, 'parsed')
 
-  if (status_code(resp) >= 300) {
+  if (httr::status_code(resp) >= 300) {
     stop(print(textview), call. = FALSE)
   }
 
