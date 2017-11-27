@@ -39,7 +39,7 @@ vortx_create_job <- function(key, data, jobname, jobdesc=NULL){
     stop("API did not return json", call. = FALSE) # check for json response
   }
 
-  if (status_code(resp) != 200) {
+  if (status_code(resp) >= 300) {
     stop(print(parsed), call. = FALSE)
   }
 
