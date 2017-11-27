@@ -7,8 +7,9 @@ Author: Edgar Valente
 Maintainer: Edgar Valente <edgar@aquare.la>
 Description: Makes API requests for VORTX software using user's API Key.
     There are functions for creating, starting and getting information about jobs, so it can be done all within an R environment.
-License: MIT
+License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
+Depends: R (>= 2.10)
 Imports: httr
 RoxygenNote: 6.0.1

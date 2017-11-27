@@ -60,7 +60,11 @@ get_col <- function(col){
 #' get_job_id(job)
 get_job_id <- function(job){
   if(typeof(job) == 'list'){
-    return(as.character(job$job$id))
+    if ('id' %in% names(job)){
+      return(job$id)
+    } else {
+      return(as.character(job$job$id))
+    }
   } else if (typeof(job) == 'character'){
     return(job)
   } else {
@@ -89,8 +93,11 @@ get_cluster_id <- function(num){
   return(id)
 }
 
-#' Data of wine
+#' Dataset of Wine
+#'
+#' A dataset containing characteristics of wines.
 #'
 #' @name wine
 #' @docType data
-NULL
+#' @format A data frame with 178 rows and 14 variables.
+'wine'

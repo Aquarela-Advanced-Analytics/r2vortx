@@ -11,7 +11,11 @@
 #' @examples
 #' mykey <- '1234567890abcefghijkl'
 #' myjobid <- '0987654321'
-#' myjob <- vortx_create_job(...)
+#'
+#' myjobname <- 'My job'
+#' myjobdesc <- 'This is a job that does job stuff'
+#' df <- data.frame(c(1,2,3), c(4,5,6), c(7,8,9))
+#' myjob <- vortx_create_job(mykey, df, myjobname, myjobdesc)
 #'
 #' get_summaryview_raw(mykey, myjob, 1, 1, 10)
 get_summaryview_raw <- function(key, job, clusternum){
@@ -23,8 +27,8 @@ get_summaryview_raw <- function(key, job, clusternum){
                    clusterid = get_cluster_id(clusternum))
 
   # Function response
-  resp <- GET(url, query = job_body)
-  summaryview <- content(resp, 'parsed')
+  resp <- httr::GET(url, query = job_body)
+  summaryview <- httr::content(resp, 'parsed')
   return(summaryview)
 }
 
@@ -41,7 +45,11 @@ get_summaryview_raw <- function(key, job, clusternum){
 #' @examples
 #' mykey <- '1234567890abcefghijkl'
 #' myjobid <- '0987654321'
-#' myjob <- vortx_create_job(...)
+#'
+#' myjobname <- 'My job'
+#' myjobdesc <- 'This is a job that does job stuff'
+#' df <- data.frame(c(1,2,3), c(4,5,6), c(7,8,9))
+#' myjob <- vortx_create_job(mykey, df, myjobname, myjobdesc)
 #'
 #' get_summaryview_single(mykey, myjob, 1)
 get_summaryview_single <- function(key, job, clusternum){
@@ -95,7 +103,11 @@ get_summaryview_single <- function(key, job, clusternum){
 #' @examples
 #' mykey <- '1234567890abcefghijkl'
 #' myjobid <- '0987654321'
-#' myjob <- vortx_create_job(...)
+#'
+#' myjobname <- 'My job'
+#' myjobdesc <- 'This is a job that does job stuff'
+#' df <- data.frame(c(1,2,3), c(4,5,6), c(7,8,9))
+#' myjob <- vortx_create_job(mykey, df, myjobname, myjobdesc)
 #'
 #' get_summaryview(mykey, myjob)
 get_summaryview <- function(key, job){

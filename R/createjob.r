@@ -19,7 +19,7 @@ vortx_create_job <- function(key, data, jobname, jobdesc=NULL){
   # Temporary data
   temp <- tempfile(pattern = 'vortxjob', tmpdir = tempdir(), fileext = '.csv')
   write.csv(data, temp, row.names = FALSE)
-  job_csv <- upload_file(temp, 'text/csv')
+  job_csv <- httr::upload_file(temp, 'text/csv')
 
   # Body of request
   url <- 'https://api.vortx.io/jobs/create'
@@ -29,17 +29,17 @@ vortx_create_job <- function(key, data, jobname, jobdesc=NULL){
                    csv = job_csv)
 
   # Function response
-  resp <- POST(url, body = job_body,
+  resp <- httr::POST(url, body = job_body,
                encode = 'multipart',
-               verbose())
+               httr::verbose())
 
-  parsed <- content(resp, 'parsed') # get response
+  parsed <- httr::content(resp, 'parsed') # get response
 
-  if (http_type(resp) != "application/json") {
+  if (httr::http_type(resp) != "application/json") {
     stop("API did not return json", call. = FALSE) # check for json response
   }
 
-  if (status_code(resp) >= 300) {
+  if (httr::status_code(resp) >= 300) {
     stop(print(parsed), call. = FALSE)
   }
 

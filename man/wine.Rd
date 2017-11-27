@@ -3,7 +3,12 @@
 \docType{data}
 \name{wine}
 \alias{wine}
-\title{Data of wine}
-\description{
-Data of wine
+\title{Dataset of Wine}
+\format{A data frame with 178 rows and 14 variables.}
+\usage{
+wine
 }
+\description{
+A dataset containing characteristics of wines.
+}
+\keyword{datasets}

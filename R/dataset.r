@@ -13,7 +13,11 @@
 #' @examples
 #' mykey <- '1234567890abcefghijkl'
 #' myjobid <- '0987654321'
-#' myjob <- vortx_create_job(...)
+#'
+#' myjobname <- 'My job'
+#' myjobdesc <- 'This is a job that does job stuff'
+#' df <- data.frame(c(1,2,3), c(4,5,6), c(7,8,9))
+#' myjob <- vortx_create_job(mykey, df, myjobname, myjobdesc)
 #'
 #' get_textview_raw(mykey, myjob, 1, 1, 10)
 get_textview_raw <- function(key, job, clusternum, start, end){
@@ -27,10 +31,10 @@ get_textview_raw <- function(key, job, clusternum, start, end){
                    end = end)
 
   # Function response
-  resp <- GET(url, query = job_body)
-  textview <- content(resp, 'parsed')
+  resp <- httr::GET(url, query = job_body)
+  textview <- httr::content(resp, 'parsed')
 
-  if (status_code(resp) != 200) {
+  if (status_code(resp) >= 300) {
     stop(print(textview), call. = FALSE)
   }
 
@@ -52,7 +56,11 @@ get_textview_raw <- function(key, job, clusternum, start, end){
 #' @examples
 #' mykey <- '1234567890abcefghijkl'
 #' myjobid <- '0987654321'
-#' myjob <- vortx_create_job(...)
+#'
+#' myjobname <- 'My job'
+#' myjobdesc <- 'This is a job that does job stuff'
+#' df <- data.frame(c(1,2,3), c(4,5,6), c(7,8,9))
+#' myjob <- vortx_create_job(mykey, df, myjobname, myjobdesc)
 #'
 #' get_dataset_single(mykey, myjob, 1, 1, 10)
 get_dataset_single <- function(key, job, clusternum, start, end){
@@ -83,7 +91,11 @@ get_dataset_single <- function(key, job, clusternum, start, end){
 #' @examples
 #' mykey <- '1234567890abcefghijkl'
 #' myjobid <- '0987654321'
-#' myjob <- vortx_create_job(...)
+#'
+#' myjobname <- 'My job'
+#' myjobdesc <- 'This is a job that does job stuff'
+#' df <- data.frame(c(1,2,3), c(4,5,6), c(7,8,9))
+#' myjob <- vortx_create_job(mykey, df, myjobname, myjobdesc)
 #'
 #' vortx_dataset(mykey, myjob)
 vortx_dataset <- function(key, job){

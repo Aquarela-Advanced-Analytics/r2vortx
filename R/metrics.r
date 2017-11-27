@@ -10,7 +10,11 @@
 #' @examples
 #' mykey <- '1234567890abcefghijkl'
 #' myjobid <- '0987654321'
-#' myjob <- vortx_create_job(...)
+#'
+#' myjobname <- 'My job'
+#' myjobdesc <- 'This is a job that does job stuff'
+#' df <- data.frame(c(1,2,3), c(4,5,6), c(7,8,9))
+#' myjob <- vortx_create_job(mykey, df, myjobname, myjobdesc)
 #'
 #' get_metrics_raw(mykey, myjob)
 get_metrics_raw <- function(key, job){
@@ -21,8 +25,8 @@ get_metrics_raw <- function(key, job){
                    jobid = get_job_id(job))
 
   # Function response
-  resp <- GET(url, query = job_body)
-  metrics <- content(resp, 'parsed')
+  resp <- httr::GET(url, query = job_body)
+  metrics <- httr::content(resp, 'parsed')
   return(metrics)
 }
 
@@ -38,7 +42,11 @@ get_metrics_raw <- function(key, job){
 #' @examples
 #' mykey <- '1234567890abcefghijkl'
 #' myjobid <- '0987654321'
-#' myjob <- vortx_create_job(...)
+#'
+#' myjobname <- 'My job'
+#' myjobdesc <- 'This is a job that does job stuff'
+#' df <- data.frame(c(1,2,3), c(4,5,6), c(7,8,9))
+#' myjob <- vortx_create_job(mykey, df, myjobname, myjobdesc)
 #'
 #' get_metrics(mykey, myjob)
 get_metrics <- function(key, job){

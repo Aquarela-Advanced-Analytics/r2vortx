@@ -11,7 +11,11 @@
 #' @examples
 #' mykey <- '1234567890abcefghijkl'
 #' myjobid <- '0987654321'
-#' myjob <- vortx_create_job(...)
+#'
+#' myjobname <- 'My job'
+#' myjobdesc <- 'This is a job that does job stuff'
+#' df <- data.frame(c(1,2,3), c(4,5,6), c(7,8,9))
+#' myjob <- vortx_create_job(mykey, df, myjobname, myjobdesc)
 #'
 #' start_organizer(mykey, myjob, 'WhateverCol')
 start_organizer <- function(key, job, ignoredcols=NULL){
@@ -26,13 +30,13 @@ start_organizer <- function(key, job, ignoredcols=NULL){
                    ignoredcols = get_col(ignoredcols))
 
   # Function response
-  resp <- POST(url, body = job_body,
+  resp <- httr::POST(url, body = job_body,
                encode = 'multipart',
-               verbose())
+               httr::verbose())
 
-  parsed <- content(resp, 'parsed')
+  parsed <- httr::content(resp, 'parsed')
 
-  if (status_code(resp) != 200) {
+  if (httr::status_code(resp) >= 300) {
     stop(print(parsed), call. = FALSE)
   }
 
