@@ -7,8 +7,8 @@
 get_job_id(job)
 }
 \arguments{
-\item{job}{String List of parsed JSON. Can be either the job ID itself
-in String format or a parsed JSON (result of a vortx_create_job, for example)
+\item{job}{String, Numeric or List of parsed JSON. Can be either the job ID itself
+in String or Numeric format or a parsed JSON (result of a vortx_create_job)
 of a job.}
 }
 \value{

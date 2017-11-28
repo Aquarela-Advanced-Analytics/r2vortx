@@ -47,8 +47,8 @@ get_col <- function(col){
 #'
 #' Helper function that gets format of job ID to be accepted in VORTX.
 #'
-#' @param job String List of parsed JSON. Can be either the job ID itself
-#' in String format or a parsed JSON (result of a vortx_create_job, for example)
+#' @param job String, Numeric or List of parsed JSON. Can be either the job ID itself
+#' in String or Numeric format or a parsed JSON (result of a vortx_create_job)
 #' of a job.
 #' @return String of job ID
 #' @examples
@@ -59,14 +59,16 @@ get_col <- function(col){
 #'
 #' get_job_id(job)
 get_job_id <- function(job){
-  if(typeof(job) == 'list'){
+  if(class(job) == 'list'){
     if ('id' %in% names(job)){
-      return(job$id)
+      return(as.character(job$id))
     } else {
       return(as.character(job$job$id))
     }
-  } else if (typeof(job) == 'character'){
+  } else if (class(job) == 'character'){
     return(job)
+  } else if (class(job) == 'numeric'){
+    return(as.character(job))
   } else {
     return(print('There is no job ID here'))
   }
