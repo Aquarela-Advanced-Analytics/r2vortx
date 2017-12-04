@@ -11,8 +11,10 @@ so it is recommended to add it as a variable in your programming environment.
 ## Installation
 
 This package can be installed via devtools
-`install.packages('devtools')`
-`devtools::install_github('edvalente/r2vortx')`
+```
+install.packages('devtools')
+devtools::install_github('edvalente/r2vortx')
+```
 
 ## API - Information
 All api addresses of VORTX can be found at api.vortx.io 
