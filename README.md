@@ -18,7 +18,7 @@ To use this package you will need to:
   
 ## 02 - Usage
 
-To use the package, you need to add
+To use the package, you need to add the following command:
 ```
 library("r2vortx")
 ```
