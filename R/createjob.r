@@ -13,8 +13,8 @@
 #' myjobdesc <- 'This is a job that does job stuff'
 #' df <- data.frame(c(1,2,3), c(4,5,6), c(7,8,9))
 #'
-#' vortx_create_job(mykey, df, myjobname, myjobdesc)
-vortx_create_job <- function(key, data, jobname, jobdesc=NULL){
+#' create_job(mykey, df, myjobname, myjobdesc)
+create_job <- function(key, data, jobname, jobdesc=NULL){
 
   # Temporary data
   temp <- tempfile(pattern = 'vortxjob', tmpdir = tempdir(), fileext = '.csv')

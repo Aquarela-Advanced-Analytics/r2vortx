@@ -95,6 +95,35 @@ get_cluster_id <- function(num){
   return(id)
 }
 
+#' Add Empty Cell
+#'
+#' Helper function to add an empty cell in a list
+#'
+#' @param list List to be used.
+#' @param item String to be added as name of item in list.
+#' @param index Integer. Index of item to be added.
+#' @return List. New list with item added with '-' as value.
+#' @examples
+#' l <- list(c('a', 'b', 'c'))
+#' add_empty(l, 'd', 2)
+add_empty <- function(list, item, index){
+  list[[item]] <- '-'
+  len <- length(list)
+  value <- list[[len]]
+  name <- names(list)[[len]]
+
+  # Start loop
+  i <- len
+  while(index < i){
+    list[[i]] <- list[[i-1]]
+    names(list)[[i]] <- names(list)[[i-1]]
+    i <- i - 1
+  }
+  list[[index]] <- value
+  names(list)[[index]] <- name
+  return(list)
+}
+
 #' Dataset of Wine
 #'
 #' A dataset containing characteristics of wines.
