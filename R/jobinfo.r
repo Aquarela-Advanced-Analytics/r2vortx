@@ -26,7 +26,7 @@ vortx_info <- function(key, job, info='all'){
     # Temporary data
     hierarchy <- get_hierarchy(key, job)
     metrics <- get_metrics(key, job)
-    dataset <- vortx_dataset(key, job)
+    dataset <- get_dataset(key, job)
     clusters <- levels(dataset[,'clusterId'])
 
     # Conditionals
