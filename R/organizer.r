@@ -15,7 +15,7 @@
 #' myjobname <- 'My job'
 #' myjobdesc <- 'This is a job that does job stuff'
 #' df <- data.frame(c(1,2,3), c(4,5,6), c(7,8,9))
-#' myjob <- vortx_create_job(mykey, df, myjobname, myjobdesc)
+#' myjob <- create_job(mykey, df, myjobname, myjobdesc)
 #'
 #' start_organizer(mykey, myjob, 'WhateverCol')
 start_organizer <- function(key, job, ignoredcols=NULL){
@@ -53,16 +53,17 @@ start_organizer <- function(key, job, ignoredcols=NULL){
 #' @param jobdesc String. Description of job to be created. Optional. Default NULL.
 #' @param ignoredcols String or Vector of strings. Optional name of columns to be ignored. Default is NULL.
 #' @return Job. Parsed content of API request, containing job information, such as job ID, used in other functions.
+#' @export
 #' @examples
 #' mykey <- '1234567890abcefghijkl'
 #' myjobname <- 'My job'
 #' myjobdesc <- 'This is a job that does job stuff'
-#' df <- data.frame(Survived = c(1,0,1), c(4,5,6), WhateverCol = c(7,8,9))
+#' df <- r2vortx::wine
 #'
-#' vortx_organizer(mykey, df, myjobname, myjobdesc, 'WhateverCol')
+#' vortx_organizer(mykey, df, myjobname, myjobdesc, 'Ash')
 vortx_organizer <- function(key, data, jobname, jobdesc=NULL, ignoredcols=NULL){
 
-  job <- vortx_create_job(key, data, jobname, jobdesc)
+  job <- create_job(key, data, jobname, jobdesc)
   job_id <- get_job_id(job)
   organizer <- start_organizer(key, job_id, ignoredcols)
 

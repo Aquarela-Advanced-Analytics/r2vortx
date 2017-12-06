@@ -97,8 +97,8 @@ get_dataset_single <- function(key, job, clusternum, start, end){
 #' df <- data.frame(c(1,2,3), c(4,5,6), c(7,8,9))
 #' myjob <- vortx_create_job(mykey, df, myjobname, myjobdesc)
 #'
-#' vortx_dataset(mykey, myjob)
-vortx_dataset <- function(key, job){
+#' get_dataset(mykey, myjob)
+get_dataset <- function(key, job){
 
   # Temporary data
   hierarchy <- get_hierarchy(key, job)
@@ -133,7 +133,7 @@ vortx_dataset <- function(key, job){
     }
     i <- i + 1
   }
-  df[,'id'] <- as.integer(as.character(df[,'id']))
+  df[,2] <- as.character(df[,2])
   df[,'clusterId'] <- factor(df[,'clusterId'])
 
   return(df)

@@ -9,6 +9,7 @@
 #' @param info String. Defines what kind of information to be extracted from job,
 #' between 'clusters', 'varscores', 'dataset' or 'summary'. Default is 'all'.
 #' @return List of DataFrames or DataFrame. If 'all' or 'summary' are defined, a list. Else specific DataFrame.
+#' @export
 #' @examples
 #' mykey <- '1234567890abcefghijkl'
 #' myjobid <- '0987654321'
