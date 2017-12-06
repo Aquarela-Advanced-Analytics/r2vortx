@@ -60,9 +60,9 @@ start_discoverer <- function(key, job, target, ignoredcols=NULL){
 #' mykey <- '1234567890abcefghijkl'
 #' myjobname <- 'My job'
 #' myjobdesc <- 'This is a job that does job stuff'
-#' df <- data.frame(Survived = c(1,0,1), c(4,5,6), WhateverCol = c(7,8,9))
+#' df <- r2vortx::wine
 #'
-#' vortx_discoverer(mykey, df, myjobname, 'Survived', myjobdesc, 'WhateverCol')
+#' vortx_discoverer(mykey, df, myjobname, 'Alcohol', myjobdesc, 'Ash')
 vortx_discoverer <- function(key, data, jobname, target, jobdesc=NULL, ignoredcols=NULL){
 
   job <- create_job(key, data, jobname, jobdesc)

@@ -11,7 +11,7 @@
 #' mykey <- '1234567890abcefghijkl'
 #' myjobname <- 'My job'
 #' myjobdesc <- 'This is a job that does job stuff'
-#' df <- data.frame(c(1,2,3), c(4,5,6), c(7,8,9))
+#' df <- r2vortx::wine
 #'
 #' create_job(mykey, df, myjobname, myjobdesc)
 create_job <- function(key, data, jobname, jobdesc=NULL){
