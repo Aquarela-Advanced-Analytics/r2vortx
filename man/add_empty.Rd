@@ -23,3 +23,4 @@ Helper function to add an empty cell in a list
 l <- list(c('a', 'b', 'c'))
 add_empty(l, 'd', 2)
 }
+\keyword{internal}

@@ -56,6 +56,7 @@ start_discoverer <- function(key, job, target, ignoredcols=NULL){
 #' @param jobdesc String. Description of job to be created. Optional. Default NULL.
 #' @param ignoredcols String or Vector of strings. Optional name of columns to be ignored. Default is NULL.
 #' @return Job. Parsed content of API request, containing job information, such as job ID, used in other functions.
+#' @export
 #' @examples
 #' mykey <- '1234567890abcefghijkl'
 #' myjobname <- 'My job'

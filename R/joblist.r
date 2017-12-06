@@ -34,6 +34,7 @@ get_joblist <- function(key, archived='true', unarchived='true'){
 #' @param archived String Shows archived jobs. Default: 'true'
 #' @param unarchived String Shows unarchived jobs. Default: 'true'
 #' @return DataFrame. Available jobs with their respective Job IDs, name and description.
+#' @export
 #'
 #' @examples
 #' mykey <- '1234567890abcefghijkl'
@@ -42,7 +43,7 @@ get_joblist <- function(key, archived='true', unarchived='true'){
 vortx_joblist <- function(key, archived='true', unarchived='true'){
 
   # Get parsed JSON
-  joblist <- get_joblist(key, archived, unarchived)
+  jobs <- get_joblist(key, archived, unarchived)
 
   # Turn into something useful
   jobs2 <- list()

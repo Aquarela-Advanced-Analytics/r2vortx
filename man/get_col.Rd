@@ -24,3 +24,4 @@ get_col(cols)
 
 get_col(col)
 }
+\keyword{internal}

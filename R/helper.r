@@ -5,6 +5,7 @@
 #' @param col String or Vector of Strings. Cols to be formatted. Can be
 #' the name of a column or a vector with names of columns.
 #' @return String in format '["col1", "col2", "col3"]'
+#' @keywords internal
 #' @examples
 #' cols <- c('col1', 'col2')
 #' col <- 'col3'
@@ -51,6 +52,7 @@ get_col <- function(col){
 #' in String or Numeric format or a parsed JSON (result of a vortx_create_job)
 #' of a job.
 #' @return String of job ID
+#' @keywords internal
 #' @examples
 #' jobid <- '1234567890'
 #' job <- vortx_create_job(...)
@@ -81,6 +83,7 @@ get_job_id <- function(job){
 #' @param num Integer or String. Can be either the number of the Cluster or
 #' the name of cluster in format 'cluster-1'
 #' @return String of cluster-id in format 'cluster-1'
+#' @keywords internal
 #' @examples
 #' clusterid <- 'cluster-1'
 #'
@@ -103,6 +106,7 @@ get_cluster_id <- function(num){
 #' @param item String to be added as name of item in list.
 #' @param index Integer. Index of item to be added.
 #' @return List. New list with item added with '-' as value.
+#' @keywords internal
 #' @examples
 #' l <- list(c('a', 'b', 'c'))
 #' add_empty(l, 'd', 2)
