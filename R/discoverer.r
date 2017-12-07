@@ -55,6 +55,7 @@ start_discoverer <- function(key, job, target, ignoredcols=NULL){
 #' @param target String. Name of column to be used as Target.
 #' @param jobdesc String. Description of job to be created. Optional. Default NULL.
 #' @param ignoredcols String or Vector of strings. Optional name of columns to be ignored. Default is NULL.
+#' @param id Integer or String. This will be checked as possible ID. Default is 1.
 #' @return Job. Parsed content of API request, containing job information, such as job ID, used in other functions.
 #' @export
 #' @examples
@@ -64,8 +65,32 @@ start_discoverer <- function(key, job, target, ignoredcols=NULL){
 #' df <- r2vortx::wine
 #'
 #' vortx_discoverer(mykey, df, myjobname, 'Alcohol', myjobdesc, 'Ash')
-vortx_discoverer <- function(key, data, jobname, target, jobdesc=NULL, ignoredcols=NULL){
+vortx_discoverer <- function(key, data, jobname, target, jobdesc=NULL, ignoredcols=NULL, id=1){
 
+  # Make sure ID column is correct
+  data <- get_id_column(data, id)
+
+  # Check for possible IDish columns and/or columns with one value and ignore them
+  pos_ids <- c()
+  for(name in names(data)){
+    if(is_idish(data, name)){
+      pos_ids <- c(pos_ids, name)
+    }
+  }
+  if(length(pos_ids) >= 2){
+    ignoredcols <- c(ignoredcols, pos_ids[2:length(pos_ids)])
+  }
+
+  # Check for columns with one value and ignore them
+  useless_cols <- c()
+  for(name in names(data)){
+    useless_cols <- c(useless_cols, name)
+  }
+  if(length(useless_cols) >= 1){
+    ignoredcols <- c(ignoredcols, useless_cols)
+  }
+
+  # Create job and run discoverer
   job <- create_job(key, data, jobname, jobdesc)
   job_id <- get_job_id(job)
   discoverer <- start_discoverer(key, job_id, target, ignoredcols)

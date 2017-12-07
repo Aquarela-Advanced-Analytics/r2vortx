@@ -4,7 +4,8 @@
 \alias{vortx_organizer}
 \title{Run Organizer from Scratch}
 \usage{
-vortx_organizer(key, data, jobname, jobdesc = NULL, ignoredcols = NULL)
+vortx_organizer(key, data, jobname, jobdesc = NULL, ignoredcols = NULL,
+  id = 1)
 }
 \arguments{
 \item{key}{String. User API Key for VORTX.}
@@ -16,6 +17,8 @@ vortx_organizer(key, data, jobname, jobdesc = NULL, ignoredcols = NULL)
 \item{jobdesc}{String. Description of job to be created. Optional. Default NULL.}
 
 \item{ignoredcols}{String or Vector of strings. Optional name of columns to be ignored. Default is NULL.}
+
+\item{id}{Integer or String. This will be checked as possible ID. Default is 1.}
 }
 \value{
 Job. Parsed content of API request, containing job information, such as job ID, used in other functions.
