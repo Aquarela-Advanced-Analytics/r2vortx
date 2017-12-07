@@ -28,6 +28,7 @@ get_col <- function(col){
     return(NULL)
   }
 
+  col <- unique(col)
   while (i != length(col)+1){
     item <- col[i]
 
@@ -127,6 +128,101 @@ add_empty <- function(list, item, index){
   names(list)[[index]] <- name
   return(list)
 }
+
+#' Is IDish
+#'
+#' Check if column has same number of unique elements as number of rows
+#'
+#' @param data DataFrame with column to be checked.
+#' @param col Integer or String. Column to be checked.
+#' @return Boolean
+is_idish <- function(data, col){
+  uniques <- length(table(data[[col]]))
+  col_len <- length(data[[col]])
+  return(uniques == col_len)
+}
+
+#' Get ID Column
+#'
+#' Defines which column will be used as ID in the dataset and puts it first named as 'id'
+#'
+#' @param data DataFrame to be checked
+#' @param id Integer or String. This will be checked as possible ID. Default is 1.
+#' @return DataFrame with ID column first.
+#' @examples
+#' df <- r2vortx::wine
+#' get_id_column(df)
+get_id_column <- function(data, id=1){
+  # Check for possible ID columns for later use
+  pos_ids <- c()
+  for(name in names(data)){
+    if(is_idish(data, name)){
+      pos_ids <- c(pos_ids, name)
+    }
+  }
+
+  # Define first column for later use
+  first <- names(data)[1]
+
+  # If user selected specific ID, use it.
+  if(id != 1 & is_idish(data, id)){
+    n <- 1
+    len <- length(data)
+
+    if(is.numeric(id)){
+      index <- id
+      v <- index
+
+    } else if(is.character(id)){
+      col_regex <- paste('^', id, '$', sep='')
+      index <- grep(col_regex, names(data))
+      v <- index
+    }
+
+    while(n <= len){
+      if(n != index){
+        v <- c(v, n)
+      }
+      n <- n + 1
+    }
+    data <- data[,v]
+    names(data)[1] <- 'id'
+
+    # Else, check if first column isn't called ID
+  } else if(first != 'id' & first != 'ID' & first != 'Id' & first != 'iD'){
+
+    # If there's a possible ID column, move it to first and rename it
+    if(!is.null(pos_ids)){
+      n <- 1
+      len <- length(data)
+      col_regex <- paste('^', pos_ids[1], '$', sep='')
+      index <- grep(col_regex, names(data))
+      v <- index
+      while(n <= len){
+        if(n != index){
+          v <- c(v, n)
+        }
+        n <- n + 1
+      }
+      data <- data[,v]
+      names(data)[1] <- 'id'
+
+      # If there's NOT a possible ID column, create one
+    } else if(is.null(pos_ids)){
+      n <- 1
+      data$id <- 1:length(data[[1]])
+      len <- length(data)
+      data <- data[ ,c(len, 1:(len-1))]
+    }
+
+    # If it IS called ID, let's use it
+  } else if(first == 'id' | first == 'ID' | first == 'Id' | first == 'iD'){
+    names(data)[1] <- 'id'
+  }
+
+  return(data)
+}
+
 
 #' Dataset of Wine
 #'

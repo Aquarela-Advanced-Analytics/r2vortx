@@ -2,7 +2,7 @@ Package: r2vortx
 Type: Package
 Title: Integrates VORTX APIs with R
 Date: 2017-11-24
-Version: 1.0
+Version: 1.2
 Author: Edgar Valente
 Maintainer: Edgar Valente <edgar@aquare.la>
 Description: Makes API requests for VORTX software using user's API Key.
