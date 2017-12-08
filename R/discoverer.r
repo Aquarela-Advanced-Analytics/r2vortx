@@ -84,7 +84,9 @@ vortx_discoverer <- function(key, data, jobname, target, jobdesc=NULL, ignoredco
   # Check for columns with one value and ignore them
   useless_cols <- c()
   for(name in names(data)){
-    useless_cols <- c(useless_cols, name)
+    if(length(table(data[[name]] == 1))){
+      useless_cols <- c(useless_cols, name)
+    }
   }
   if(length(useless_cols) >= 1){
     ignoredcols <- c(ignoredcols, useless_cols)
