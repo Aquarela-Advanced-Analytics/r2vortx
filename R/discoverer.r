@@ -32,7 +32,7 @@ start_discoverer <- function(key, job, target, ignoredcols=NULL){
                    targetcols = get_col(target))
 
   # Function response
-  resp <- httr::POST(url, body = job_body,
+  resp <- httr::POST(url, query = job_body,
                encode = 'multipart',
                httr::verbose())
 
