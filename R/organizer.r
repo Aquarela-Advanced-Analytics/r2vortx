@@ -81,7 +81,7 @@ vortx_organizer <- function(key, data, jobname, jobdesc=NULL, ignoredcols=NULL, 
   # Check for columns with one value and ignore them
   useless_cols <- c()
   for(name in names(data)){
-    if(length(table(data[[name]] == 1))){
+    if(length(table(data[[name]])) == 1){
       useless_cols <- c(useless_cols, name)
     }
   }
