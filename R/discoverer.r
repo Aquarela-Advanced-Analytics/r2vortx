@@ -28,8 +28,8 @@ start_discoverer <- function(key, job, target, ignoredcols=NULL){
   url <- 'https://api.vortx.io/discoverer/start'
   job_body <- list(apikey = key,
                    jobid = job_id,
-                   targetcols = get_col(target),
-                   ignoredcols = get_col(ignoredcols))
+                   ignoredcols = get_col(ignoredcols),
+                   targetcols = get_col(target))
 
   # Function response
   resp <- httr::POST(url, body = job_body,
