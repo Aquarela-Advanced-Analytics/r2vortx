@@ -26,6 +26,7 @@ DataFrame of a cluster dataset
 Gets dataset for a cluster of job in VORTX in DataFrame format
 }
 \examples{
+\dontrun{
 mykey <- '1234567890abcefghijkl'
 myjobid <- '0987654321'
 
@@ -35,4 +36,5 @@ df <- data.frame(c(1,2,3), c(4,5,6), c(7,8,9))
 myjob <- vortx_create_job(mykey, df, myjobname, myjobdesc)
 
 get_dataset_single(mykey, myjob, 1, 1, 10)
+}
 }

@@ -17,10 +17,12 @@ String of cluster-id in format 'cluster-1'
 Helper function that gets format of Cluster ID to be accepted in VORTX.
 }
 \examples{
+\dontrun{
 clusterid <- 'cluster-1'
 
 get_cluster_id(clusterid)
 
 get_cluster_id(1)
+}
 }
 \keyword{internal}

@@ -9,6 +9,7 @@
 #' @param ignoredcols String or Vector of strings. Optional name of columns to be ignored. Default is NULL.
 #' @return Job. Parsed content of API request, containing job information, such as job ID, used in other functions.
 #' @examples
+#' \dontrun{
 #' mykey <- '1234567890abcefghijkl'
 #' myjobid <- '0987654321'
 #'
@@ -18,6 +19,7 @@
 #' myjob <- create_job(mykey, df, myjobname, myjobdesc)
 #'
 #' start_organizer(mykey, myjob, 'WhateverCol')
+#' }
 start_organizer <- function(key, job, ignoredcols=NULL){
   # job can be either a list containing job data
   # or a character with jobid
@@ -56,12 +58,14 @@ start_organizer <- function(key, job, ignoredcols=NULL){
 #' @return Job. Parsed content of API request, containing job information, such as job ID, used in other functions.
 #' @export
 #' @examples
+#' \dontrun{
 #' mykey <- '1234567890abcefghijkl'
 #' myjobname <- 'My job'
 #' myjobdesc <- 'This is a job that does job stuff'
 #' df <- r2vortx::wine
 #'
 #' vortx_organizer(mykey, df, myjobname, myjobdesc, 'Ash')
+#' }
 vortx_organizer <- function(key, data, jobname, jobdesc=NULL, ignoredcols=NULL, id=1){
 
   # Make sure ID column is correct

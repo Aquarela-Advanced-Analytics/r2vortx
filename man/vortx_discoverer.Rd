@@ -29,10 +29,12 @@ Job. Parsed content of API request, containing job information, such as job ID, 
 Creates a job and runs Discoverer
 }
 \examples{
+\dontrun{
 mykey <- '1234567890abcefghijkl'
 myjobname <- 'My job'
 myjobdesc <- 'This is a job that does job stuff'
 df <- r2vortx::wine
 
 vortx_discoverer(mykey, df, myjobname, 'Alcohol', myjobdesc, 'Ash')
+}
 }

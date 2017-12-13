@@ -18,11 +18,13 @@ String of job ID
 Helper function that gets format of job ID to be accepted in VORTX.
 }
 \examples{
+\dontrun{
 jobid <- '1234567890'
 job <- vortx_create_job(...)
 
 get_job_id(jobid)
 
 get_job_id(job)
+}
 }
 \keyword{internal}

@@ -8,17 +8,19 @@
 #' @param jobdesc String. Description of job to be created. Optional. Default NULL.
 #' @return Job. Parsed content of API request, containing job information, such as job ID, used in other functions.
 #' @examples
+#' \dontrun{
 #' mykey <- '1234567890abcefghijkl'
 #' myjobname <- 'My job'
 #' myjobdesc <- 'This is a job that does job stuff'
 #' df <- r2vortx::wine
 #'
 #' create_job(mykey, df, myjobname, myjobdesc)
+#' }
 create_job <- function(key, data, jobname, jobdesc=NULL){
 
   # Temporary data
   temp <- tempfile(pattern = 'vortxjob', tmpdir = tempdir(), fileext = '.csv')
-  write.csv(data, temp, row.names = FALSE)
+  utils::write.csv(data, temp, row.names = FALSE)
   job_csv <- httr::upload_file(temp, 'text/csv')
 
   # Body of request

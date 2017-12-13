@@ -20,7 +20,9 @@ DataFrame. Available jobs with their respective Job IDs, name and description.
 Gets a raw list of jobs in VORTX user's account
 }
 \examples{
+\dontrun{
 mykey <- '1234567890abcefghijkl'
 
 get_joblist(mykey)
+}
 }

@@ -9,6 +9,7 @@
 #' @param clusternum Integer or String. Can be cluster number (int) or cluster name in format 'cluster-x'.
 #' @return List of parsed JSON.
 #' @examples
+#' \dontrun{
 #' mykey <- '1234567890abcefghijkl'
 #' myjobid <- '0987654321'
 #'
@@ -18,6 +19,7 @@
 #' myjob <- vortx_create_job(mykey, df, myjobname, myjobdesc)
 #'
 #' get_summaryview_raw(mykey, myjob, 1, 1, 10)
+#' }
 get_summaryview_raw <- function(key, job, clusternum){
 
   # Temporary data
@@ -43,6 +45,7 @@ get_summaryview_raw <- function(key, job, clusternum){
 #' @param clusternum Integer or String. Can be cluster number (int) or cluster name in format 'cluster-x'.
 #' @return List of DataFrames.
 #' @examples
+#' \dontrun{
 #' mykey <- '1234567890abcefghijkl'
 #' myjobid <- '0987654321'
 #'
@@ -52,6 +55,7 @@ get_summaryview_raw <- function(key, job, clusternum){
 #' myjob <- vortx_create_job(mykey, df, myjobname, myjobdesc)
 #'
 #' get_summaryview_single(mykey, myjob, 1)
+#' }
 get_summaryview_single <- function(key, job, clusternum){
 
   summaryview <- get_summaryview_raw(key, job, clusternum)
@@ -101,6 +105,7 @@ get_summaryview_single <- function(key, job, clusternum){
 #' result of organizer or discoverer functions.
 #' @return List of DataFrames.
 #' @examples
+#' \dontrun{
 #' mykey <- '1234567890abcefghijkl'
 #' myjobid <- '0987654321'
 #'
@@ -110,6 +115,7 @@ get_summaryview_single <- function(key, job, clusternum){
 #' myjob <- vortx_create_job(mykey, df, myjobname, myjobdesc)
 #'
 #' get_summaryview(mykey, myjob)
+#' }
 get_summaryview <- function(key, job){
 
   # Get a list of clusters

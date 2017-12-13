@@ -17,11 +17,13 @@ String in format '["col1", "col2", "col3"]'
 Helper function that gets format of columns to be accepted in VORTX.
 }
 \examples{
+\dontrun{
 cols <- c('col1', 'col2')
 col <- 'col3'
 
 get_col(cols)
 
 get_col(col)
+}
 }
 \keyword{internal}

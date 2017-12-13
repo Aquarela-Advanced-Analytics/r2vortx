@@ -8,9 +8,11 @@
 #' @return DataFrame. Available jobs with their respective Job IDs, name and description.
 #'
 #' @examples
+#' \dontrun{
 #' mykey <- '1234567890abcefghijkl'
 #'
 #' get_joblist(mykey)
+#' }
 get_joblist <- function(key, archived='true', unarchived='true'){
 
   # Temporary data
@@ -37,9 +39,11 @@ get_joblist <- function(key, archived='true', unarchived='true'){
 #' @export
 #'
 #' @examples
+#' \dontrun{
 #' mykey <- '1234567890abcefghijkl'
 #'
 #' vortx_joblist(mykey)
+#' }
 vortx_joblist <- function(key, archived='true', unarchived='true'){
 
   # Get parsed JSON

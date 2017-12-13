@@ -11,6 +11,7 @@
 #' @param end Integer. Ending row to get info from.
 #' @return List of parsed JSON.
 #' @examples
+#' \dontrun{
 #' mykey <- '1234567890abcefghijkl'
 #' myjobid <- '0987654321'
 #'
@@ -20,6 +21,7 @@
 #' myjob <- vortx_create_job(mykey, df, myjobname, myjobdesc)
 #'
 #' get_textview_raw(mykey, myjob, 1, 1, 10)
+#' }
 get_textview_raw <- function(key, job, clusternum, start, end){
 
   # Temporary data
@@ -54,6 +56,7 @@ get_textview_raw <- function(key, job, clusternum, start, end){
 #' @param end Integer. Ending row to get info from.
 #' @return DataFrame of a cluster dataset
 #' @examples
+#' \dontrun{
 #' mykey <- '1234567890abcefghijkl'
 #' myjobid <- '0987654321'
 #'
@@ -63,6 +66,7 @@ get_textview_raw <- function(key, job, clusternum, start, end){
 #' myjob <- vortx_create_job(mykey, df, myjobname, myjobdesc)
 #'
 #' get_dataset_single(mykey, myjob, 1, 1, 10)
+#' }
 get_dataset_single <- function(key, job, clusternum, start, end){
 
   # Get raw information
@@ -89,6 +93,7 @@ get_dataset_single <- function(key, job, clusternum, start, end){
 #' result of organizer or discoverer functions.
 #' @return DataFrame of a job dataset
 #' @examples
+#' \dontrun{
 #' mykey <- '1234567890abcefghijkl'
 #' myjobid <- '0987654321'
 #'
@@ -98,6 +103,7 @@ get_dataset_single <- function(key, job, clusternum, start, end){
 #' myjob <- vortx_create_job(mykey, df, myjobname, myjobdesc)
 #'
 #' get_dataset(mykey, myjob)
+#' }
 get_dataset <- function(key, job){
 
   # Temporary data

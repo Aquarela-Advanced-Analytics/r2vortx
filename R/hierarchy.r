@@ -8,6 +8,7 @@
 #' result of organizer or discoverer functions.
 #' @return List of parsed JSON.
 #' @examples
+#' \dontrun{
 #' mykey <- '1234567890abcefghijkl'
 #' myjobid <- '0987654321'
 #'
@@ -17,6 +18,7 @@
 #' myjob <- vortx_create_job(mykey, df, myjobname, myjobdesc)
 #'
 #' get_hierarchy_raw(mykey, myjob)
+#' }
 get_hierarchy_raw <- function(key, job){
 
   # Temporary data
@@ -41,6 +43,7 @@ get_hierarchy_raw <- function(key, job){
 #' result of organizer or discoverer functions.
 #' @return DataFrame.
 #' @examples
+#' \dontrun{
 #' mykey <- '1234567890abcefghijkl'
 #' myjobid <- '0987654321'
 #'
@@ -50,6 +53,7 @@ get_hierarchy_raw <- function(key, job){
 #' myjob <- vortx_create_job(mykey, df, myjobname, myjobdesc)
 #'
 #' get_hierarchy(mykey, myjob)
+#' }
 get_hierarchy <- function(key, job){
 
   hierarchy <- get_hierarchy_raw(key, job)

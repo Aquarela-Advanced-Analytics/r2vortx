@@ -11,6 +11,7 @@
 #' @return List of DataFrames or DataFrame. If 'all' or 'summary' are defined, a list. Else specific DataFrame.
 #' @export
 #' @examples
+#' \dontrun{
 #' mykey <- '1234567890abcefghijkl'
 #' myjobid <- '0987654321'
 #'
@@ -21,6 +22,7 @@
 #'
 #' vortx_info(mykey, myjobid, info = 'clusters')
 #' vortx_info(mykey, myjob)
+#' }
 vortx_info <- function(key, job, info='all'){
 
     # Temporary data

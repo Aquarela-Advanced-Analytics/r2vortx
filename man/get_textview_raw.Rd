@@ -26,6 +26,7 @@ List of parsed JSON.
 Gets raw textview of job in VORTX in parsed JSON format
 }
 \examples{
+\dontrun{
 mykey <- '1234567890abcefghijkl'
 myjobid <- '0987654321'
 
@@ -35,4 +36,5 @@ df <- data.frame(c(1,2,3), c(4,5,6), c(7,8,9))
 myjob <- vortx_create_job(mykey, df, myjobname, myjobdesc)
 
 get_textview_raw(mykey, myjob, 1, 1, 10)
+}
 }

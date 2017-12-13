@@ -10,6 +10,7 @@
 #' @param ignoredcols String or Vector of strings. Optional name of columns to be ignored. Default is NULL.
 #' @return Job. Parsed content of API request, containing job information, such as job ID, used in other functions.
 #' @examples
+#' \dontrun{
 #' mykey <- '1234567890abcefghijkl'
 #' myjobid <- '0987654321'
 #'
@@ -19,6 +20,7 @@
 #' myjob <- create_job(mykey, df, myjobname, myjobdesc)
 #'
 #' start_discoverer(mykey, myjob, myjobname, myjobdesc)
+#' }
 start_discoverer <- function(key, job, target, ignoredcols=NULL){
   # job can be either a list containing job data
   # or a character with jobid
@@ -59,12 +61,14 @@ start_discoverer <- function(key, job, target, ignoredcols=NULL){
 #' @return Job. Parsed content of API request, containing job information, such as job ID, used in other functions.
 #' @export
 #' @examples
+#' \dontrun{
 #' mykey <- '1234567890abcefghijkl'
 #' myjobname <- 'My job'
 #' myjobdesc <- 'This is a job that does job stuff'
 #' df <- r2vortx::wine
 #'
 #' vortx_discoverer(mykey, df, myjobname, 'Alcohol', myjobdesc, 'Ash')
+#' }
 vortx_discoverer <- function(key, data, jobname, target, jobdesc=NULL, ignoredcols=NULL, id=1){
 
   # Make sure ID column is correct
