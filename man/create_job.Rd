@@ -22,10 +22,12 @@ Job. Parsed content of API request, containing job information, such as job ID, 
 Creates a job in VORTX
 }
 \examples{
+\dontrun{
 mykey <- '1234567890abcefghijkl'
 myjobname <- 'My job'
 myjobdesc <- 'This is a job that does job stuff'
 df <- r2vortx::wine
 
 create_job(mykey, df, myjobname, myjobdesc)
+}
 }

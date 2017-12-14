@@ -7,12 +7,14 @@
 #' @return String in format '["col1", "col2", "col3"]'
 #' @keywords internal
 #' @examples
+#' \dontrun{
 #' cols <- c('col1', 'col2')
 #' col <- 'col3'
 #'
 #' get_col(cols)
 #'
 #' get_col(col)
+#' }
 get_col <- function(col){
   # (vector) -> string
   # Input a character or vector of named columns
@@ -55,12 +57,14 @@ get_col <- function(col){
 #' @return String of job ID
 #' @keywords internal
 #' @examples
+#' \dontrun{
 #' jobid <- '1234567890'
 #' job <- vortx_create_job(...)
 #'
 #' get_job_id(jobid)
 #'
 #' get_job_id(job)
+#' }
 get_job_id <- function(job){
   if(class(job) == 'list'){
     if ('id' %in% names(job)){
@@ -86,11 +90,13 @@ get_job_id <- function(job){
 #' @return String of cluster-id in format 'cluster-1'
 #' @keywords internal
 #' @examples
+#' \dontrun{
 #' clusterid <- 'cluster-1'
 #'
 #' get_cluster_id(clusterid)
 #'
 #' get_cluster_id(1)
+#' }
 get_cluster_id <- function(num){
   if (nchar(num) > 1){
     return(num)
@@ -108,9 +114,6 @@ get_cluster_id <- function(num){
 #' @param index Integer. Index of item to be added.
 #' @return List. New list with item added with '-' as value.
 #' @keywords internal
-#' @examples
-#' l <- list(c('a', 'b', 'c'))
-#' add_empty(l, 'd', 2)
 add_empty <- function(list, item, index){
   list[[item]] <- '-'
   len <- length(list)
@@ -150,8 +153,10 @@ is_idish <- function(data, col){
 #' @param id Integer or String. This will be checked as possible ID. Default is 1.
 #' @return DataFrame with ID column first.
 #' @examples
+#' \dontrun{
 #' df <- r2vortx::wine
 #' get_id_column(df)
+#' }
 get_id_column <- function(data, id=1){
   # Check for possible ID columns for later use
   pos_ids <- c()

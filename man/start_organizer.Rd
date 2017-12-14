@@ -22,6 +22,7 @@ Job. Parsed content of API request, containing job information, such as job ID, 
 Runs Organizer from a created Job in VORTX
 }
 \examples{
+\dontrun{
 mykey <- '1234567890abcefghijkl'
 myjobid <- '0987654321'
 
@@ -31,4 +32,5 @@ df <- data.frame(c(1,2,3), c(4,5,6), c(7,8,9))
 myjob <- create_job(mykey, df, myjobname, myjobdesc)
 
 start_organizer(mykey, myjob, 'WhateverCol')
+}
 }

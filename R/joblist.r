@@ -8,9 +8,11 @@
 #' @return DataFrame. Available jobs with their respective Job IDs, name and description.
 #'
 #' @examples
+#' \dontrun{
 #' mykey <- '1234567890abcefghijkl'
 #'
 #' get_joblist(mykey)
+#' }
 get_joblist <- function(key, archived='true', unarchived='true'){
 
   # Temporary data
@@ -37,9 +39,11 @@ get_joblist <- function(key, archived='true', unarchived='true'){
 #' @export
 #'
 #' @examples
+#' \dontrun{
 #' mykey <- '1234567890abcefghijkl'
 #'
 #' vortx_joblist(mykey)
+#' }
 vortx_joblist <- function(key, archived='true', unarchived='true'){
 
   # Get parsed JSON
@@ -67,4 +71,16 @@ vortx_joblist <- function(key, archived='true', unarchived='true'){
     n <- n + 1
   }
   result <- data.frame(do.call(rbind, jobs2))
+
+  # Selecting which variables to change to which type
+  to_numeric <- c('rows', 'cols', 'rawModelVersion', 'estimatedTimeInMin')
+  to_factor <- c('jobType', 'status', 'visibility', 'archived')
+  to_character <- c(!names(result) %in% c(to_numeric))
+
+  # Change types
+  result[,to_numeric] <- lapply(result[,to_numeric], as.numeric)
+  result[,to_character] <- lapply(result[,to_character], as.character)
+  result[,to_factor] <- lapply(result[,to_factor], factor)
+
+  return(result)
 }

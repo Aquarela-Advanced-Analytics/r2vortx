@@ -19,8 +19,4 @@ List. New list with item added with '-' as value.
 \description{
 Helper function to add an empty cell in a list
 }
-\examples{
-l <- list(c('a', 'b', 'c'))
-add_empty(l, 'd', 2)
-}
 \keyword{internal}

@@ -10,6 +10,7 @@
 #' @param ignoredcols String or Vector of strings. Optional name of columns to be ignored. Default is NULL.
 #' @return Job. Parsed content of API request, containing job information, such as job ID, used in other functions.
 #' @examples
+#' \dontrun{
 #' mykey <- '1234567890abcefghijkl'
 #' myjobid <- '0987654321'
 #'
@@ -19,6 +20,7 @@
 #' myjob <- create_job(mykey, df, myjobname, myjobdesc)
 #'
 #' start_discoverer(mykey, myjob, myjobname, myjobdesc)
+#' }
 start_discoverer <- function(key, job, target, ignoredcols=NULL){
   # job can be either a list containing job data
   # or a character with jobid
@@ -28,11 +30,11 @@ start_discoverer <- function(key, job, target, ignoredcols=NULL){
   url <- 'https://api.vortx.io/discoverer/start'
   job_body <- list(apikey = key,
                    jobid = job_id,
-                   targetcols = get_col(target),
-                   ignoredcols = get_col(ignoredcols))
+                   ignoredcols = get_col(ignoredcols),
+                   targetcols = get_col(target))
 
   # Function response
-  resp <- httr::POST(url, body = job_body,
+  resp <- httr::POST(url, query = job_body,
                encode = 'multipart',
                httr::verbose())
 
@@ -59,12 +61,14 @@ start_discoverer <- function(key, job, target, ignoredcols=NULL){
 #' @return Job. Parsed content of API request, containing job information, such as job ID, used in other functions.
 #' @export
 #' @examples
+#' \dontrun{
 #' mykey <- '1234567890abcefghijkl'
 #' myjobname <- 'My job'
 #' myjobdesc <- 'This is a job that does job stuff'
 #' df <- r2vortx::wine
 #'
 #' vortx_discoverer(mykey, df, myjobname, 'Alcohol', myjobdesc, 'Ash')
+#' }
 vortx_discoverer <- function(key, data, jobname, target, jobdesc=NULL, ignoredcols=NULL, id=1){
 
   # Make sure ID column is correct
@@ -84,7 +88,9 @@ vortx_discoverer <- function(key, data, jobname, target, jobdesc=NULL, ignoredco
   # Check for columns with one value and ignore them
   useless_cols <- c()
   for(name in names(data)){
-    useless_cols <- c(useless_cols, name)
+    if(length(table(data[[name]])) == 1){
+      useless_cols <- c(useless_cols, name)
+    }
   }
   if(length(useless_cols) >= 1){
     ignoredcols <- c(ignoredcols, useless_cols)

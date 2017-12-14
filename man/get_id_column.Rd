@@ -18,6 +18,8 @@ DataFrame with ID column first.
 Defines which column will be used as ID in the dataset and puts it first named as 'id'
 }
 \examples{
+\dontrun{
 df <- r2vortx::wine
 get_id_column(df)
+}
 }

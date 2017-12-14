@@ -23,6 +23,7 @@ List of DataFrames or DataFrame. If 'all' or 'summary' are defined, a list. Else
 Gets information on a VORTX job
 }
 \examples{
+\dontrun{
 mykey <- '1234567890abcefghijkl'
 myjobid <- '0987654321'
 
@@ -33,4 +34,5 @@ myjob <- vortx_create_job(mykey, df, myjobname, myjobdesc)
 
 vortx_info(mykey, myjobid, info = 'clusters')
 vortx_info(mykey, myjob)
+}
 }

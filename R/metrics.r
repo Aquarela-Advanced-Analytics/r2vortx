@@ -8,6 +8,7 @@
 #' result of organizer or discoverer functions.
 #' @return List of parsed JSON.
 #' @examples
+#' \dontrun{
 #' mykey <- '1234567890abcefghijkl'
 #' myjobid <- '0987654321'
 #'
@@ -17,6 +18,7 @@
 #' myjob <- vortx_create_job(mykey, df, myjobname, myjobdesc)
 #'
 #' get_metrics_raw(mykey, myjob)
+#' }
 get_metrics_raw <- function(key, job){
 
   # Temporary data
@@ -40,6 +42,7 @@ get_metrics_raw <- function(key, job){
 #' result of organizer or discoverer functions.
 #' @return DataFrame.
 #' @examples
+#' \dontrun{
 #' mykey <- '1234567890abcefghijkl'
 #' myjobid <- '0987654321'
 #'
@@ -49,6 +52,7 @@ get_metrics_raw <- function(key, job){
 #' myjob <- vortx_create_job(mykey, df, myjobname, myjobdesc)
 #'
 #' get_metrics(mykey, myjob)
+#' }
 get_metrics <- function(key, job){
 
   metrics <- get_metrics_raw(key, job)
