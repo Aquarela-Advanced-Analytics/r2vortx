@@ -7,9 +7,9 @@
 refine_pull(name = NULL, id = NULL, encoding = "UTF-8")
 }
 \arguments{
-\item{name}{String. Name of project in OpenRefine.}
+\item{name}{String. Name of project in OpenRefine. Either name or ID must be given.}
 
-\item{id}{String. ID of project in OpenRefine. Obtainable by clicking 'About' in OpenRefine.}
+\item{id}{String. ID of project in OpenRefine. Obtainable by clicking 'About' in OpenRefine. Either name or ID must be given.}
 
 \item{encoding}{String. Encoding of uploaded file. Default is UTF-8.}
 }

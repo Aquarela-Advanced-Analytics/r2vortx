@@ -7,9 +7,9 @@
 refine_kill(name = NULL, id = NULL)
 }
 \arguments{
-\item{name}{String. Name of project in OpenRefine.}
+\item{name}{String. Name of project in OpenRefine. Either name or ID must be given.}
 
-\item{id}{String. ID of project in OpenRefine. Obtainable by clicking 'About' in OpenRefine.}
+\item{id}{String. ID of project in OpenRefine. Obtainable by clicking 'About' in OpenRefine. Either name or ID must be given.}
 }
 \description{
 Kills project in OpenRefine

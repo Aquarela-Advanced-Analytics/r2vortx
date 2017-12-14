@@ -2,6 +2,7 @@
 
 export(refine_kill)
 export(refine_list)
+export(refine_mime)
 export(refine_pull)
 export(refine_push)
 export(vortx_discoverer)
