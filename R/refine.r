@@ -39,8 +39,8 @@ refine_push <- function(data, name=NULL){
 #'
 #' Pulls data from OpenRefine to R as a DataFrame
 #'
-#' @param id String. ID of project in OpenRefine. Obtainable by clicking 'About' in OpenRefine.
-#' @param name String. Name of project in OpenRefine.
+#' @param name String. Name of project in OpenRefine. Either name or ID must be given.
+#' @param id String. ID of project in OpenRefine. Obtainable by clicking 'About' in OpenRefine. Either name or ID must be given.
 #' @param encoding String. Encoding of uploaded file. Default is UTF-8.
 #' @return DataFrame of dataset in OpenRefine
 #' @export
@@ -101,8 +101,8 @@ refine_list <- function(){
 #'
 #' Kills project in OpenRefine
 #'
-#' @param id String. ID of project in OpenRefine. Obtainable by clicking 'About' in OpenRefine.
-#' @param name String. Name of project in OpenRefine.
+#' @param name String. Name of project in OpenRefine. Either name or ID must be given.
+#' @param id String. ID of project in OpenRefine. Obtainable by clicking 'About' in OpenRefine. Either name or ID must be given.
 #' @export
 refine_kill <- function(name=NULL, id=NULL){
 
@@ -119,6 +119,43 @@ refine_kill <- function(name=NULL, id=NULL){
   } else {
     message('Project deleted!')
   }
+}
+
+#' Apply (mimes) changes from existent project in OpenRefine to R data
+#'
+#' @param data DataFrame to be mimed
+#' @param mime.name String with name of project that contains the changes. Either name or ID must be given.
+#' @param mime.id String with ID of project that contains the changes. Either name or ID must be given.
+#' @export
+#' @examples
+#' \dontrun{
+#' refine_mime(df, 'diamonds')
+#' }
+refine_mime <- function(data, mime.name=NULL, mime.id=NULL){
+
+  # Send data
+  refine_push(data, 'Temporary')
+
+  # Get operations from mime
+  mime_id <- get_refine_id(mime.name, mime.id)
+  operations <- httr::GET('http://localhost:3333/command/core/get-operations',
+                          query=list(project=mime_id))
+  operations <- content(operations, 'text')
+  operations <- jsonlite::fromJSON(operations)
+  operations <- jsonlite::toJSON(operations$entries$operation)
+
+  # Apply operations on new data
+  new_id <- get_refine_id('Temporary')
+  httr::POST(url = 'http://localhost:3333/command/core/apply-operations?',
+             body = list(project=new_id, operations=operations),
+             encode='form')
+  message('Changes being applied...')
+
+  # Get data back and delete project
+  new_data <- refine_pull(id=new_id)
+  refine_kill(id=new_id)
+  return(new_data)
+
 }
 
 #' Gets ID from project in OpenRefine
