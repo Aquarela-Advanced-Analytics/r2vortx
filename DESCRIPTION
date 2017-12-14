@@ -13,5 +13,6 @@ LazyData: true
 Depends: R (>= 2.10)
 Imports: 
     httr,
-    utils
+    utils,
+    readr
 RoxygenNote: 6.0.1

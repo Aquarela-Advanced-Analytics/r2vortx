@@ -2,7 +2,7 @@
 % Please edit documentation in R/refine.r
 \name{refine_push}
 \alias{refine_push}
-\title{Upload data to local OpenRefine}
+\title{Push data from R to OpenRefine}
 \usage{
 refine_push(data, name = NULL)
 }
@@ -12,7 +12,7 @@ refine_push(data, name = NULL)
 \item{name}{String. Name of project to be created. Default is NULL (Untitled)}
 }
 \description{
-Uploads a DataFrame to an OpenRefine at the same machine
+Pushes data from R to OpenRefine as a CSV
 }
 \examples{
 \dontrun{

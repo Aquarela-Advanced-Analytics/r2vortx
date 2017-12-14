@@ -2,14 +2,14 @@
 % Please edit documentation in R/refine.r
 \name{refine_pull}
 \alias{refine_pull}
-\title{Downloads csv file from OpenRefine}
+\title{Pull data from OpenRefine to R}
 \usage{
-refine_pull(id = NULL, name = NULL, format = "csv", encoding = "UTF-8")
+refine_pull(name = NULL, id = NULL, encoding = "UTF-8")
 }
 \arguments{
-\item{id}{String. ID of project in OpenRefine. Obtainable by clicking 'About' in OpenRefine.}
-
 \item{name}{String. Name of project in OpenRefine.}
+
+\item{id}{String. ID of project in OpenRefine. Obtainable by clicking 'About' in OpenRefine.}
 
 \item{encoding}{String. Encoding of uploaded file. Default is UTF-8.}
 }
@@ -17,7 +17,7 @@ refine_pull(id = NULL, name = NULL, format = "csv", encoding = "UTF-8")
 DataFrame of dataset in OpenRefine
 }
 \description{
-Extracts a dataset in OpenRefine to R as CSV and loaded as a DataFrame
+Pulls data from OpenRefine to R as a DataFrame
 }
 \examples{
 \dontrun{
