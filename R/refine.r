@@ -140,7 +140,7 @@ refine_mime <- function(data, mime.name=NULL, mime.id=NULL){
   mime_id <- get_refine_id(mime.name, mime.id)
   operations <- httr::GET('http://localhost:3333/command/core/get-operations',
                           query=list(project=mime_id))
-  operations <- content(operations, 'text')
+  operations <- httr::content(operations, 'text')
   operations <- jsonlite::fromJSON(operations)
   operations <- jsonlite::toJSON(operations$entries$operation)
 
