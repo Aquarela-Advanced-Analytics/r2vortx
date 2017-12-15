@@ -79,7 +79,7 @@ vortx_organizer <- function(key, data, jobname, jobdesc=NULL, ignoredcols=NULL, 
   file <- get_id_column(file, id)
 
   # Get ignored columns
-  ignored <- get_ignored()
+  ignored <- get_ignored(file)
   ignoredcols <- c(ignoredcols, ignored)
 
   # Create job and run organizer

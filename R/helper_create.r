@@ -15,8 +15,10 @@ get_source <- function(data, source=NULL, sheet=NULL){
   } else if (source == 'googlesheets'){
     googlesheets::gs_auth(new_user=TRUE)
     reg_sheet <- googlesheets::gs_title(data)
+    if (is.null(sheet)){
+      sheet <- 1
+    }
     file <- googlesheets::gs_read(ss=reg_sheet, ws=sheet)
-
   # Set file from R
   } else {
     file <- data
@@ -30,6 +32,7 @@ get_source <- function(data, source=NULL, sheet=NULL){
 #' @return vector with ignored columns
 get_ignored <- function(data){
   # Check for possible IDish columns and/or columns with one value and ignore them
+  ignoredcols <- c()
   pos_ids <- c()
   for(name in names(data)){
     if(is_idish(data, name)){
