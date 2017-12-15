@@ -5,7 +5,7 @@
 \title{Run Organizer from Scratch}
 \usage{
 vortx_organizer(key, data, jobname, jobdesc = NULL, ignoredcols = NULL,
-  id = 1)
+  id = 1, source = NULL, sheet = NULL)
 }
 \arguments{
 \item{key}{String. User API Key for VORTX.}
@@ -19,6 +19,10 @@ vortx_organizer(key, data, jobname, jobdesc = NULL, ignoredcols = NULL,
 \item{ignoredcols}{String or Vector of strings. Optional name of columns to be ignored. Default is NULL.}
 
 \item{id}{Integer or String. This will be checked as possible ID. Default is 1.}
+
+\item{source}{String defining source. May contain 'excel' or 'googlesheets'. Default NULL for R.}
+
+\item{sheet}{String with number or name of sheet to be imported from source. Default NULL for first. Unnecessary for R.}
 }
 \value{
 Job. Parsed content of API request, containing job information, such as job ID, used in other functions.

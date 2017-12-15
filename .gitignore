@@ -4,3 +4,4 @@
 .Ruserdata
 .Rbuildignore
 scrapbook.R
+.httr-oauth

@@ -15,5 +15,7 @@ Imports:
     httr,
     jsonlite,
     utils,
+    googlesheets,
+    readxl,
     readr
 RoxygenNote: 6.0.1
