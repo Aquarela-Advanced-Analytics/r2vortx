@@ -2,7 +2,8 @@
 #'
 #' @param data Depends on source. DataFrame for R, virtually anything that
 #' identifies a googlesheet for 'googlesheets' or path for 'excel'.
-#' @param source String defining source. May contain 'excel' or 'googlesheets'. Default NULL for R
+#' @param source String defining source. May contain 'excel' or 'googlesheets'. Default NULL for R.
+#' Use 'googlesheets_new' for new user.
 #' @param sheet number or name of sheet to be imported from source. Default NULL for first.
 #' @return DataFrame to be sent to vortx
 get_source <- function(data, source=NULL, sheet=NULL){
@@ -12,8 +13,10 @@ get_source <- function(data, source=NULL, sheet=NULL){
     file <- readxl::read_excel(path=data, sheet=sheet, col_types='text')
 
   # Set file from Googlesheets
-  } else if (source == 'googlesheets'){
-    googlesheets::gs_auth(new_user=TRUE)
+  } else if (source == 'googlesheets' | source == 'googlesheets_new'){
+    if (source == 'googlesheets_new'){
+      googlesheets::gs_auth(new_user=TRUE)
+    }
     reg_sheet <- googlesheets::gs_title(data)
     if (is.null(sheet)){
       sheet <- 1
