@@ -10,7 +10,9 @@ vortx_organizer(key, data, jobname, jobdesc = NULL, ignoredcols = NULL,
 \arguments{
 \item{key}{String. User API Key for VORTX.}
 
-\item{data}{DataFrame. Data to be created as a job.}
+\item{data}{Data to be created as a job. If no source is defined, it should be a DataFrame.
+If source is 'googlesheets', could be name, ID or any information that refers to it.
+If source is 'excel', it should be the path to file.}
 
 \item{jobname}{String. Title of job to be created.}
 

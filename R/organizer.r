@@ -50,7 +50,9 @@ start_organizer <- function(key, job, ignoredcols=NULL){
 #' Creates a job and runs Organizer
 #'
 #' @param key String. User API Key for VORTX.
-#' @param data DataFrame. Data to be created as a job.
+#' @param data Data to be created as a job. If no source is defined, it should be a DataFrame.
+#' If source is 'googlesheets', could be name, ID or any information that refers to it.
+#' If source is 'excel', it should be the path to file.
 #' @param jobname String. Title of job to be created.
 #' @param jobdesc String. Description of job to be created. Optional. Default NULL.
 #' @param ignoredcols String or Vector of strings. Optional name of columns to be ignored. Default is NULL.
