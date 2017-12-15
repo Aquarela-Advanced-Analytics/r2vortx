@@ -52,7 +52,9 @@ start_discoverer <- function(key, job, target, ignoredcols=NULL){
 #' Creates a job and runs Discoverer
 #'
 #' @param key String. User API Key for VORTX.
-#' @param data DataFrame. Data to be created as a job.
+#' @param data Data to be created as a job. If no source is defined, it should be a DataFrame.
+#' If source is 'googlesheets', could be name, ID or any information that refers to it.
+#' If source is 'excel', it should be the path to file.
 #' @param jobname String. Title of job to be created.
 #' @param target String. Name of column to be used as Target.
 #' @param jobdesc String. Description of job to be created. Optional. Default NULL.
