@@ -9,12 +9,12 @@
 get_source <- function(data, source=NULL, sheet=NULL){
 
   # Set file from Excel xlsx
-  if (source == 'excel'){
+  if (!is.null(source) & source == 'excel'){
     file <- readxl::read_excel(path=data, sheet=sheet, col_types='text')
 
   # Set file from Googlesheets
-  } else if (source == 'googlesheets' | source == 'googlesheets_new'){
-    if (source == 'googlesheets_new'){
+  } else if (!is.null(source) & (source == 'googlesheets' | source == 'googlesheets_new')){
+    if (!is.null(source) & source == 'googlesheets_new'){
       googlesheets::gs_auth(new_user=TRUE)
     }
     reg_sheet <- googlesheets::gs_title(data)
