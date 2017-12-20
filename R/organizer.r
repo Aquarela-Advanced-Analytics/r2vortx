@@ -71,7 +71,7 @@ start_organizer <- function(key, job, ignoredcols=NULL){
 #'
 #' vortx_organizer(mykey, df, myjobname, myjobdesc, 'Ash')
 #' }
-vortx_organizer <- function(key, data, jobname, jobdesc=NULL, ignoredcols=NULL, id=1, source=NULL, sheet=NULL){
+vortx_organizer <- function(key, data, jobname, jobdesc=NULL, ignoredcols=NULL, id=1, source='r', sheet=NULL){
 
   # Check source
   file <- get_source(data, source, sheet)
