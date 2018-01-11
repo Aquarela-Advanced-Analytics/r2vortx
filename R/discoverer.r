@@ -74,7 +74,7 @@ start_discoverer <- function(key, job, target, ignoredcols=NULL){
 #'
 #' vortx_discoverer(mykey, df, myjobname, 'Alcohol', myjobdesc, 'Ash')
 #' }
-vortx_discoverer <- function(key, data, jobname, target, jobdesc=NULL, ignoredcols=NULL, id=1, source=NULL, sheet=NULL){
+vortx_discoverer <- function(key, data, jobname, target, jobdesc=NULL, ignoredcols=NULL, id=1, source='r', sheet=NULL){
 
   # Check source
   file <- get_source(data, source, sheet)
@@ -89,7 +89,7 @@ vortx_discoverer <- function(key, data, jobname, target, jobdesc=NULL, ignoredco
   # Create job and run discoverer
   job <- create_job(key, file, jobname, jobdesc)
   job_id <- get_job_id(job)
-  discoverer <- start_discoverer(key, job_id, target, ignoredcols)
+  discoverer <- start_discoverer(key=key, job=job_id, target=target, ignoredcols=ignoredcols)
 
   return(discoverer)
 }
