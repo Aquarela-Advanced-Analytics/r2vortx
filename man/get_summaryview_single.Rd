@@ -4,7 +4,7 @@
 \alias{get_summaryview_single}
 \title{Get Cluster's Summaryview}
 \usage{
-get_summaryview_single(key, job, clusternum)
+get_summaryview_single(key, job, clusternum, sandbox = FALSE)
 }
 \arguments{
 \item{key}{String. User API Key for VORTX.}
@@ -14,6 +14,8 @@ in string format or parsed JSON in list format,
 result of organizer or discoverer functions.}
 
 \item{clusternum}{Integer or String. Can be cluster number (int) or cluster name in format 'cluster-x'.}
+
+\item{sandbox}{Choose TRUE if job is to be sent to sandbox instead}
 }
 \value{
 List of DataFrames.
@@ -34,3 +36,4 @@ myjob <- vortx_create_job(mykey, df, myjobname, myjobdesc)
 get_summaryview_single(mykey, myjob, 1)
 }
 }
+\keyword{internal}

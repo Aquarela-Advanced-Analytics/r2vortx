@@ -8,6 +8,7 @@
 #' result of organizer or discoverer functions.
 #' @param target String. Name of column to be used as Target.
 #' @param ignoredcols String or Vector of strings. Optional name of columns to be ignored. Default is NULL.
+#' @param sandbox Choose TRUE if job is to be sent to sandbox instead
 #' @return Job. Parsed content of API request, containing job information, such as job ID, used in other functions.
 #' @examples
 #' \dontrun{
@@ -21,13 +22,14 @@
 #'
 #' start_discoverer(mykey, myjob, myjobname, myjobdesc)
 #' }
-start_discoverer <- function(key, job, target, ignoredcols=NULL){
+start_discoverer <- function(key, job, target, ignoredcols=NULL, sandbox=FALSE){
   # job can be either a list containing job data
   # or a character with jobid
 
   # Temporary data
   job_id <- get_job_id(job)
-  url <- 'https://api.vortx.io/discoverer/start'
+  if (sandbox) sb <- "sandbox-" else sb <- ""
+  url <- paste("https://", sb, "api.vortx.io/discoverer/start", sep="")
   job_body <- list(apikey = key,
                    jobid = job_id,
                    ignoredcols = get_col(ignoredcols),
@@ -63,6 +65,7 @@ start_discoverer <- function(key, job, target, ignoredcols=NULL){
 #' @param source String defining source. May contain 'excel' or 'googlesheets'. Default NULL for R.
 #' Use 'googlesheets_new' for new user.
 #' @param sheet String with number or name of sheet to be imported from source. Default NULL for first. Unnecessary for R.
+#' @param sandbox Choose TRUE if job is to be sent to sandbox instead
 #' @return Job. Parsed content of API request, containing job information, such as job ID, used in other functions.
 #' @export
 #' @examples
@@ -74,7 +77,7 @@ start_discoverer <- function(key, job, target, ignoredcols=NULL){
 #'
 #' vortx_discoverer(mykey, df, myjobname, 'Alcohol', myjobdesc, 'Ash')
 #' }
-vortx_discoverer <- function(key, data, jobname, target, jobdesc=NULL, ignoredcols=NULL, id=1, source='r', sheet=NULL){
+vortx_discoverer <- function(key, data, jobname, target, jobdesc=NULL, ignoredcols=NULL, id=1, source='r', sheet=NULL, sandbox=FALSE){
 
   # Check source
   file <- get_source(data, source, sheet)
@@ -90,9 +93,9 @@ vortx_discoverer <- function(key, data, jobname, target, jobdesc=NULL, ignoredco
   ignoredcols <- c(ignoredcols, ignored)
 
   # Create job and run discoverer
-  job <- create_job(key, file, jobname, jobdesc)
+  job <- create_job(key, file, jobname, jobdesc, sandbox)
   job_id <- get_job_id(job)
-  discoverer <- start_discoverer(key=key, job=job_id, target=target, ignoredcols=ignoredcols)
+  discoverer <- start_discoverer(key=key, job=job_id, target=target, ignoredcols=ignoredcols, sandbox=sandbox)
 
   return(discoverer)
 }

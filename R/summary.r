@@ -7,7 +7,9 @@
 #' in string format or parsed JSON in list format,
 #' result of organizer or discoverer functions.
 #' @param clusternum Integer or String. Can be cluster number (int) or cluster name in format 'cluster-x'.
+#' @param sandbox Choose TRUE if job is to be sent to sandbox instead
 #' @return List of parsed JSON.
+#' @keywords internal
 #' @examples
 #' \dontrun{
 #' mykey <- '1234567890abcefghijkl'
@@ -20,10 +22,11 @@
 #'
 #' get_summaryview_raw(mykey, myjob, 1, 1, 10)
 #' }
-get_summaryview_raw <- function(key, job, clusternum){
+get_summaryview_raw <- function(key, job, clusternum, sandbox=FALSE){
 
   # Temporary data
-  url <- 'https://api.vortx.io/analyses/summaryview'
+  if (sandbox) sb <- "sandbox-" else sb <- ""
+  url <- paste("https://", sb, "api.vortx.io/analyses/summaryview", sep="")
   job_body <- list(apikey = key,
                    jobid = get_job_id(job),
                    clusterid = get_cluster_id(clusternum))
@@ -43,7 +46,9 @@ get_summaryview_raw <- function(key, job, clusternum){
 #' in string format or parsed JSON in list format,
 #' result of organizer or discoverer functions.
 #' @param clusternum Integer or String. Can be cluster number (int) or cluster name in format 'cluster-x'.
+#' @param sandbox Choose TRUE if job is to be sent to sandbox instead
 #' @return List of DataFrames.
+#' @keywords internal
 #' @examples
 #' \dontrun{
 #' mykey <- '1234567890abcefghijkl'
@@ -56,9 +61,9 @@ get_summaryview_raw <- function(key, job, clusternum){
 #'
 #' get_summaryview_single(mykey, myjob, 1)
 #' }
-get_summaryview_single <- function(key, job, clusternum){
+get_summaryview_single <- function(key, job, clusternum, sandbox=FALSE){
 
-  summaryview <- get_summaryview_raw(key, job, clusternum)
+  summaryview <- get_summaryview_raw(key, job, clusternum, sandbox)
 
   options(scipen=999)
   view <- summaryview$vars
@@ -103,7 +108,9 @@ get_summaryview_single <- function(key, job, clusternum){
 #' @param job String or List. Can be either a job ID number
 #' in string format or parsed JSON in list format,
 #' result of organizer or discoverer functions.
+#' @param sandbox Choose TRUE if job is to be sent to sandbox instead
 #' @return List of DataFrames.
+#' @keywords internal
 #' @examples
 #' \dontrun{
 #' mykey <- '1234567890abcefghijkl'
@@ -116,10 +123,10 @@ get_summaryview_single <- function(key, job, clusternum){
 #'
 #' get_summaryview(mykey, myjob)
 #' }
-get_summaryview <- function(key, job){
+get_summaryview <- function(key, job, sandbox=FALSE){
 
   # Get a list of clusters
-  hierarchy <- get_hierarchy(key, job)
+  hierarchy <- get_hierarchy(key, job, sandbox)
   clusters <- as.character(hierarchy[-1,1])
 
   cluster_view <- list()

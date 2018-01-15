@@ -6,6 +6,7 @@
 #' @param data DataFrame. Data to be created as a job.
 #' @param jobname String. Title of job to be created.
 #' @param jobdesc String. Description of job to be created. Optional. Default NULL.
+#' @param sandbox Choose TRUE if job is to be sent to sandbox instead
 #' @return Job. Parsed content of API request, containing job information, such as job ID, used in other functions.
 #' @examples
 #' \dontrun{
@@ -16,7 +17,7 @@
 #'
 #' create_job(mykey, df, myjobname, myjobdesc)
 #' }
-create_job <- function(key, data, jobname, jobdesc=NULL){
+create_job <- function(key, data, jobname, jobdesc=NULL, sandbox=FALSE){
 
   # Write temporary .csv file
   temp <- tempfile(pattern = 'vortxjob', tmpdir = tempdir(), fileext = '.csv')
@@ -24,7 +25,8 @@ create_job <- function(key, data, jobname, jobdesc=NULL){
   job_csv <- httr::upload_file(temp, 'text/csv')
 
   # Body of request
-  url <- 'https://api.vortx.io/jobs/create'
+  if (sandbox) sb <- "sandbox-" else sb <- ""
+  url <- paste("https://", sb, "api.vortx.io/jobs/create", sep="")
   job_body <- list(apikey = key,
                    name = jobname,
                    description = jobdesc,

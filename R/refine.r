@@ -163,6 +163,7 @@ refine_mime <- function(data, mime.name=NULL, mime.id=NULL){
 #' @param project_name String with project Name
 #' @param project_id String with project ID
 #' @return String with project ID
+#' @keywords internal
 get_refine_id <- function(project_name=NULL, project_id=NULL ){
 
   # If nothing is given, return error

@@ -4,7 +4,7 @@
 \alias{get_dataset}
 \title{Get full dataset}
 \usage{
-get_dataset(key, job)
+get_dataset(key, job, sandbox = FALSE)
 }
 \arguments{
 \item{key}{String. User API Key for VORTX.}
@@ -12,6 +12,8 @@ get_dataset(key, job)
 \item{job}{String or List. Can be either a job ID number
 in string format or parsed JSON in list format,
 result of organizer or discoverer functions.}
+
+\item{sandbox}{Choose TRUE if job is to be sent to sandbox instead}
 }
 \value{
 DataFrame of a job dataset

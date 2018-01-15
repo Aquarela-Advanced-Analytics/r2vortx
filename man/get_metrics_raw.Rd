@@ -4,7 +4,7 @@
 \alias{get_metrics_raw}
 \title{Get Raw Metrics of Clusters}
 \usage{
-get_metrics_raw(key, job)
+get_metrics_raw(key, job, sandbox = FALSE)
 }
 \arguments{
 \item{key}{String. User API Key for VORTX.}
@@ -12,6 +12,8 @@ get_metrics_raw(key, job)
 \item{job}{String or List. Can be either a job ID number
 in string format or parsed JSON in list format,
 result of organizer or discoverer functions.}
+
+\item{sandbox}{Choose TRUE if job is to be sent to sandbox instead}
 }
 \value{
 List of parsed JSON.
@@ -32,3 +34,4 @@ myjob <- vortx_create_job(mykey, df, myjobname, myjobdesc)
 get_metrics_raw(mykey, myjob)
 }
 }
+\keyword{internal}

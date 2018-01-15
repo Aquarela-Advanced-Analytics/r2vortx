@@ -7,6 +7,7 @@
 #' in string format or parsed JSON in list format,
 #' result of organizer or discoverer functions.
 #' @param ignoredcols String or Vector of strings. Optional name of columns to be ignored. Default is NULL.
+#' @param sandbox Choose TRUE if job is to be sent to sandbox instead
 #' @return Job. Parsed content of API request, containing job information, such as job ID, used in other functions.
 #' @examples
 #' \dontrun{
@@ -20,13 +21,14 @@
 #'
 #' start_organizer(mykey, myjob, 'WhateverCol')
 #' }
-start_organizer <- function(key, job, ignoredcols=NULL){
+start_organizer <- function(key, job, ignoredcols=NULL, sandbox=FALSE){
   # job can be either a list containing job data
   # or a character with jobid
 
   # Temporary data
   job_id <- get_job_id(job)
-  url <- 'https://api.vortx.io/jobs/start'
+  if (sandbox) sb <- "sandbox-" else sb <- ""
+  url <- paste("https://", sb, "api.vortx.io/jobs/start", sep="")
   job_body <- list(apikey = key,
                    jobid = job_id,
                    ignoredcols = get_col(ignoredcols))
@@ -60,6 +62,7 @@ start_organizer <- function(key, job, ignoredcols=NULL){
 #' @param source String defining source. May contain 'excel' or 'googlesheets'. Default NULL for R.
 #' Use 'googlesheets_new' for new user.
 #' @param sheet String with number or name of sheet to be imported from source. Default NULL for first. Unnecessary for R.
+#' @param sandbox Choose TRUE if job is to be sent to sandbox instead
 #' @return Job. Parsed content of API request, containing job information, such as job ID, used in other functions.
 #' @export
 #' @examples
@@ -71,7 +74,7 @@ start_organizer <- function(key, job, ignoredcols=NULL){
 #'
 #' vortx_organizer(mykey, df, myjobname, myjobdesc, 'Ash')
 #' }
-vortx_organizer <- function(key, data, jobname, jobdesc=NULL, ignoredcols=NULL, id=1, source='r', sheet=NULL){
+vortx_organizer <- function(key, data, jobname, jobdesc=NULL, ignoredcols=NULL, id=1, source='r', sheet=NULL, sandbox=FALSE){
 
   # Check source
   file <- get_source(data, source, sheet)
@@ -84,9 +87,9 @@ vortx_organizer <- function(key, data, jobname, jobdesc=NULL, ignoredcols=NULL, 
   ignoredcols <- c(ignoredcols, ignored)
 
   # Create job and run organizer
-  job <- create_job(key, file, jobname, jobdesc)
+  job <- create_job(key, file, jobname, jobdesc, sandbox)
   job_id <- get_job_id(job)
-  organizer <- start_organizer(key, job_id, ignoredcols)
+  organizer <- start_organizer(key, job_id, ignoredcols, sandbox)
 
   return(organizer)
 }

@@ -15,3 +15,4 @@ vector with ignored columns
 \description{
 Get columns that should be ignored in VORTX
 }
+\keyword{internal}

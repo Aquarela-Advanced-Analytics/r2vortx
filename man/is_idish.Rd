@@ -17,3 +17,4 @@ Boolean
 \description{
 Check if column has same number of unique elements as number of rows
 }
+\keyword{internal}
