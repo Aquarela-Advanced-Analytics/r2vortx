@@ -5,7 +5,7 @@
 \title{Run Discoverer from Scratch}
 \usage{
 vortx_discoverer(key, data, jobname, target, jobdesc = NULL,
-  ignoredcols = NULL, id = 1, source = NULL, sheet = NULL)
+  ignoredcols = NULL, id = 1, source = "r", sheet = NULL)
 }
 \arguments{
 \item{key}{String. User API Key for VORTX.}
@@ -24,7 +24,8 @@ If source is 'excel', it should be the path to file.}
 
 \item{id}{Integer or String. This will be checked as possible ID. Default is 1.}
 
-\item{source}{String defining source. May contain 'excel' or 'googlesheets'. Default NULL for R}
+\item{source}{String defining source. May contain 'excel' or 'googlesheets'. Default NULL for R.
+Use 'googlesheets_new' for new user.}
 
 \item{sheet}{String with number or name of sheet to be imported from source. Default NULL for first. Unnecessary for R.}
 }

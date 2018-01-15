@@ -4,13 +4,14 @@
 \alias{get_source}
 \title{Get file from different source if source is not NULL}
 \usage{
-get_source(data, source = NULL, sheet = NULL)
+get_source(data, source = "r", sheet = NULL)
 }
 \arguments{
 \item{data}{Depends on source. DataFrame for R, virtually anything that
 identifies a googlesheet for 'googlesheets' or path for 'excel'.}
 
-\item{source}{String defining source. May contain 'excel' or 'googlesheets'. Default NULL for R}
+\item{source}{String defining source. May contain 'excel' or 'googlesheets'. Default is r.
+Use 'googlesheets_new' for new user.}
 
 \item{sheet}{number or name of sheet to be imported from source. Default NULL for first.}
 }

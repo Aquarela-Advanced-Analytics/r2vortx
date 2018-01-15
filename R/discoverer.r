@@ -82,6 +82,9 @@ vortx_discoverer <- function(key, data, jobname, target, jobdesc=NULL, ignoredco
   # Make sure ID column is correct
   file <- get_id_column(file, id)
 
+  # Move target to first after ID
+  file <- get_target_column(file, target)
+
   # Get ignored columns
   ignored <- get_ignored(file)
   ignoredcols <- c(ignoredcols, ignored)

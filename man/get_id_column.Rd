@@ -23,3 +23,4 @@ df <- r2vortx::wine
 get_id_column(df)
 }
 }
+\keyword{internal}
