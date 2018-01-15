@@ -6,7 +6,9 @@
 #' @param job String or List. Can be either a job ID number
 #' in string format or parsed JSON in list format,
 #' result of organizer or discoverer functions.
+#' @param sandbox Choose TRUE if job is to be sent to sandbox instead
 #' @return List of parsed JSON.
+#' @keywords internal
 #' @examples
 #' \dontrun{
 #' mykey <- '1234567890abcefghijkl'
@@ -19,10 +21,11 @@
 #'
 #' get_hierarchy_raw(mykey, myjob)
 #' }
-get_hierarchy_raw <- function(key, job){
+get_hierarchy_raw <- function(key, job, sandbox=FALSE){
 
   # Temporary data
-  url <- 'https://api.vortx.io/analyses/hierarchy'
+  if (sandbox) sb <- "sandbox-" else sb <- ""
+  url <- paste("https://", sb, "api.vortx.io/analyses/hierarchy", sep="")
   job_body <- list(apikey = key,
                    jobid = get_job_id(job))
 
@@ -41,6 +44,8 @@ get_hierarchy_raw <- function(key, job){
 #' @param job String or List. Can be either a job ID number
 #' in string format or parsed JSON in list format,
 #' result of organizer or discoverer functions.
+#' @param sandbox Choose TRUE if job is to be sent to sandbox instead
+#' @keywords internal
 #' @return DataFrame.
 #' @examples
 #' \dontrun{
@@ -54,9 +59,9 @@ get_hierarchy_raw <- function(key, job){
 #'
 #' get_hierarchy(mykey, myjob)
 #' }
-get_hierarchy <- function(key, job){
+get_hierarchy <- function(key, job, sandbox=FALSE){
 
-  hierarchy <- get_hierarchy_raw(key, job)
+  hierarchy <- get_hierarchy_raw(key, job, sandbox)
 
   clusters_outer <- hierarchy$children
   clusters_inner <- hierarchy$children[[1]]$children

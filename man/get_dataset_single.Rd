@@ -4,7 +4,7 @@
 \alias{get_dataset_single}
 \title{Get dataset for a single cluster}
 \usage{
-get_dataset_single(key, job, clusternum, start, end)
+get_dataset_single(key, job, clusternum, start, end, sandbox = FALSE)
 }
 \arguments{
 \item{key}{String. User API Key for VORTX.}
@@ -18,6 +18,8 @@ result of organizer or discoverer functions.}
 \item{start}{Integer. Starting row to get info from.}
 
 \item{end}{Integer. Ending row to get info from.}
+
+\item{sandbox}{Choose TRUE if job is to be sent to sandbox instead}
 }
 \value{
 DataFrame of a cluster dataset

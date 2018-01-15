@@ -5,7 +5,9 @@
 #' @param key String. User API Key for VORTX.
 #' @param archived String Shows archived jobs. Default: 'true'
 #' @param unarchived String Shows unarchived jobs. Default: 'true'
+#' @param sandbox Choose TRUE if job is to be sent to sandbox instead
 #' @return DataFrame. Available jobs with their respective Job IDs, name and description.
+#' @keywords internal
 #'
 #' @examples
 #' \dontrun{
@@ -13,10 +15,11 @@
 #'
 #' get_joblist(mykey)
 #' }
-get_joblist <- function(key, archived='true', unarchived='true'){
+get_joblist <- function(key, archived='true', unarchived='true', sandbox=FALSE){
 
   # Temporary data
-  url <- 'https://api.vortx.io/jobs/list'
+  if (sandbox) sb <- "sandbox-" else sb <- ""
+  url <- paste("https://", sb, "api.vortx.io/jobs/list", sep="")
   job_body <- list(apikey = key,
                    archived = archived,
                    unarchived = unarchived)
@@ -35,6 +38,7 @@ get_joblist <- function(key, archived='true', unarchived='true'){
 #' @param key String. User API Key for VORTX.
 #' @param archived String Shows archived jobs. Default: 'true'
 #' @param unarchived String Shows unarchived jobs. Default: 'true'
+#' @param sandbox Choose TRUE if job is to be sent to sandbox instead
 #' @return DataFrame. Available jobs with their respective Job IDs, name and description.
 #' @export
 #'
@@ -44,10 +48,10 @@ get_joblist <- function(key, archived='true', unarchived='true'){
 #'
 #' vortx_joblist(mykey)
 #' }
-vortx_joblist <- function(key, archived='true', unarchived='true'){
+vortx_joblist <- function(key, archived='true', unarchived='true', sandbox=FALSE){
 
   # Get parsed JSON
-  jobs <- get_joblist(key, archived, unarchived)
+  jobs <- get_joblist(key, archived, unarchived, sandbox)
 
   # Turn into something useful
   jobs2 <- list()

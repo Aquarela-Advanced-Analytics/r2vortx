@@ -4,7 +4,7 @@
 \alias{start_discoverer}
 \title{Start Discoverer}
 \usage{
-start_discoverer(key, job, target, ignoredcols = NULL)
+start_discoverer(key, job, target, ignoredcols = NULL, sandbox = FALSE)
 }
 \arguments{
 \item{key}{String. User API Key for VORTX.}
@@ -16,6 +16,8 @@ result of organizer or discoverer functions.}
 \item{target}{String. Name of column to be used as Target.}
 
 \item{ignoredcols}{String or Vector of strings. Optional name of columns to be ignored. Default is NULL.}
+
+\item{sandbox}{Choose TRUE if job is to be sent to sandbox instead}
 }
 \value{
 Job. Parsed content of API request, containing job information, such as job ID, used in other functions.

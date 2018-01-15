@@ -6,6 +6,7 @@
 #' Use 'googlesheets_new' for new user.
 #' @param sheet number or name of sheet to be imported from source. Default NULL for first.
 #' @return DataFrame to be sent to vortx
+#' @keywords internal
 get_source <- function(data, source='r', sheet=NULL){
 
   # Set file from Excel xlsx
@@ -33,6 +34,7 @@ get_source <- function(data, source='r', sheet=NULL){
 #'
 #' @param data data to be tested
 #' @return vector with ignored columns
+#' @keywords internal
 get_ignored <- function(data){
   # Check for possible IDish columns and/or columns with one value and ignore them
   ignoredcols <- c()
@@ -66,6 +68,7 @@ get_ignored <- function(data){
 #' @param data DataFrame with column to be checked.
 #' @param col Integer or String. Column to be checked.
 #' @return Boolean
+#' @keywords internal
 is_idish <- function(data, col){
   uniques <- length(table(data[[col]]))
   col_len <- length(data[[col]])

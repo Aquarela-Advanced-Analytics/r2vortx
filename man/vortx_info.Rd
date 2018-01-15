@@ -4,7 +4,7 @@
 \alias{vortx_info}
 \title{Get information}
 \usage{
-vortx_info(key, job, info = "all")
+vortx_info(key, job, info = "all", sandbox = FALSE)
 }
 \arguments{
 \item{key}{String. User API Key for VORTX.}
@@ -15,6 +15,8 @@ result of organizer or discoverer functions.}
 
 \item{info}{String. Defines what kind of information to be extracted from job,
 between 'clusters', 'varscores', 'dataset' or 'summary'. Default is 'all'.}
+
+\item{sandbox}{Choose TRUE if job is to be sent to sandbox instead}
 }
 \value{
 List of DataFrames or DataFrame. If 'all' or 'summary' are defined, a list. Else specific DataFrame.

@@ -4,7 +4,7 @@
 \alias{get_joblist}
 \title{Raw list of jobs in VORTX}
 \usage{
-get_joblist(key, archived = "true", unarchived = "true")
+get_joblist(key, archived = "true", unarchived = "true", sandbox = FALSE)
 }
 \arguments{
 \item{key}{String. User API Key for VORTX.}
@@ -12,6 +12,8 @@ get_joblist(key, archived = "true", unarchived = "true")
 \item{archived}{String Shows archived jobs. Default: 'true'}
 
 \item{unarchived}{String Shows unarchived jobs. Default: 'true'}
+
+\item{sandbox}{Choose TRUE if job is to be sent to sandbox instead}
 }
 \value{
 DataFrame. Available jobs with their respective Job IDs, name and description.
@@ -26,3 +28,4 @@ mykey <- '1234567890abcefghijkl'
 get_joblist(mykey)
 }
 }
+\keyword{internal}
