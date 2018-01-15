@@ -69,7 +69,7 @@ get_ignored <- function(data){
 is_idish <- function(data, col){
   uniques <- length(table(data[[col]]))
   col_len <- length(data[[col]])
-  return(uniques == col_len)
+  return(uniques == col_len & !is.numeric(data[[col]]))
 }
 
 #' Get ID Column
@@ -79,6 +79,7 @@ is_idish <- function(data, col){
 #' @param data DataFrame to be checked
 #' @param id Integer or String. This will be checked as possible ID. Default is 1.
 #' @return DataFrame with ID column first.
+#' @keywords internal
 #' @examples
 #' \dontrun{
 #' df <- r2vortx::wine
@@ -152,5 +153,22 @@ get_id_column <- function(data, id=1){
     names(data)[1] <- 'id'
   }
 
+  return(data)
+}
+
+#' Move Target column to first after ID
+#'
+#' @return DataFrame with target column after ID
+#' @keywords internal
+get_target_column <- function(data, target){
+
+  # Check if column exists
+  if (!target %in% names(data)) stop("There is no such Target column", call. = FALSE)
+
+  # Move column
+  index <- grep(target, names(data))
+  col_indexes <- 1:length(data)
+  col_order <- c(1, index, col_indexes[!col_indexes %in% c(1, index)])
+  data <- data[ , col_order]
   return(data)
 }
