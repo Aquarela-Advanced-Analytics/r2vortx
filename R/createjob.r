@@ -21,7 +21,7 @@ create_job <- function(key, data, jobname, jobdesc=NULL, sandbox=FALSE){
 
   # Write temporary .csv file
   temp <- tempfile(pattern = 'vortxjob', tmpdir = tempdir(), fileext = '.csv')
-  utils::write.csv(data, temp, row.names = FALSE)
+  utils::write.csv(data, temp, row.names = FALSE, fileEncoding = "UTF-8")
   job_csv <- httr::upload_file(temp, 'text/csv')
 
   # Body of request
