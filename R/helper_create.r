@@ -175,3 +175,23 @@ get_target_column <- function(data, target){
   data <- data[ , col_order]
   return(data)
 }
+
+#' Delete column with only one value
+#'
+#' @return List with DataFrame with removed column and the name of the column
+#' @keywords internal
+remove_constant <- function(data){
+
+  # Get constant column(s)
+  constant <- sapply(data, function(x) 1 == length(table(x)))
+
+  # If there is one, delete it and save its name
+  if (sum(constant) >= 1){
+    col_names <- names(constant[constant == TRUE])
+    col_names <- paste0("[", col_names, "]", collapse='')
+    df <- data[ ,!constant, drop=FALSE]
+    cat(paste0("Variable(s) removed: ", col_names))
+  } else col_names <- c()
+
+  return(list(Dataset=df, Names=col_names))
+}
