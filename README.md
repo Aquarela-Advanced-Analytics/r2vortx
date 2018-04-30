@@ -17,6 +17,8 @@ so it is recommended to add it as a variable in your programming environment.
    - **refine_pull**: Gets data from local OpenRefine to R
    - **refine_list**: Lists projects in local OpenRefine
    - **refine_kill**: Deletes project in local OpenRefine
+   - **refine_mime**: Apply (mimes) changes from existent project in OpenRefine to R data
+
 
 Arguments and usage can be found in the documentation.
 
