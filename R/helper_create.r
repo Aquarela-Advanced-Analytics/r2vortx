@@ -187,7 +187,7 @@ remove_constant <- function(data){
 
   # If there is one, delete it and save its name
   if (sum(constant) >= 1){
-    col_names <- names(constant[constant == TRUE])
+    col_names <- names(constant[constant])
     col_names <- paste0("[", col_names, "]", collapse='')
     data <- data[!constant]
     cat(paste0("Variable(s) removed: ", col_names))
