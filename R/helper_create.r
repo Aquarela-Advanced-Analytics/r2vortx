@@ -61,6 +61,19 @@ get_ignored <- function(data){
   return(ignoredcols)
 }
 
+#' Ignore variables
+#'
+#' @param data data with variables to ignore
+#' @param ignoredcols character vector with names of variables to be ignored
+#' @return new data with renamed variables
+#' @keywords internal
+rename_ignored <- function(data, ignoredcols) {
+  old_names <- new_names <- names(data)
+  new_names[old_names %in% ignoredcols] <- gsub("^(.*)", "!\\1", ignoredcols)
+  names(data) <- new_names
+  return(data)
+}
+
 #' Is IDish
 #'
 #' Check if column has same number of unique elements as number of rows
@@ -178,6 +191,7 @@ get_target_column <- function(data, target){
 
 #' Delete column with only one value
 #'
+#' @param data data to remove constant
 #' @return List with DataFrame with removed column and the name of the column
 #' @keywords internal
 remove_constant <- function(data){

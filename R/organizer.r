@@ -80,11 +80,11 @@ vortx_organizer <- function(key, data, jobname, jobdesc=NULL, ignoredcols=NULL, 
   file <- get_source(data, source, sheet)
 
   # Remove constant variables and add names to job description
-  constant <- remove_constant(file)
-  file <- constant[[1]]
-  if (length(constant[[2]]) == 1){
-    jobdesc <- c(jobdesc, paste0(" Removed Constants: ", constant[[2]]))
-  }
+  # constant <- remove_constant(file)
+  # file <- constant[[1]]
+  # if (length(constant[[2]]) == 1){
+  #   jobdesc <- c(jobdesc, paste0(" Removed Constants: ", constant[[2]]))
+  # }
 
   # Make sure ID column is correct
   file <- get_id_column(file, id)
@@ -92,11 +92,12 @@ vortx_organizer <- function(key, data, jobname, jobdesc=NULL, ignoredcols=NULL, 
   # Get ignored columns
   ignored <- get_ignored(file)
   ignoredcols <- c(ignoredcols, ignored)
+  file <- rename_ignored(file, ignoredcols)
 
   # Create job and run organizer
   job <- create_job(key, file, jobname, jobdesc, sandbox)
   job_id <- get_job_id(job)
-  organizer <- start_organizer(key, job_id, ignoredcols, sandbox)
+  organizer <- start_organizer(key=key, job=job_id, ignoredcols=NULL, sandbox=sandbox)
 
   return(organizer)
 }
