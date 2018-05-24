@@ -83,11 +83,11 @@ vortx_discoverer <- function(key, data, jobname, target, jobdesc=NULL, ignoredco
   file <- get_source(data, source, sheet)
 
   # Remove constant variables and add names to job description
-  constant <- remove_constant(file)
-  file <- constant[[1]]
-  if (length(constant[[2]]) == 1){
-    jobdesc <- c(jobdesc, paste0(" Removed Constants: ", constant[[2]]))
-  }
+  # constant <- remove_constant(file)
+  # file <- constant[[1]]
+  # if (length(constant[[2]]) == 1){
+  #   jobdesc <- c(jobdesc, paste0(" Removed Constants: ", constant[[2]]))
+  # }
 
   # Make sure ID column is correct
   file <- get_id_column(file, id)
@@ -98,11 +98,12 @@ vortx_discoverer <- function(key, data, jobname, target, jobdesc=NULL, ignoredco
   # Get ignored columns
   ignored <- get_ignored(file)
   ignoredcols <- c(ignoredcols, ignored)
+  file <- rename_ignored(file, ignoredcols)
 
   # Create job and run discoverer
   job <- create_job(key, file, jobname, jobdesc, sandbox)
   job_id <- get_job_id(job)
-  discoverer <- start_discoverer(key=key, job=job_id, target=target, ignoredcols=ignoredcols, sandbox=sandbox)
+  discoverer <- start_discoverer(key=key, job=job_id, target=target, ignoredcols=NULL, sandbox=sandbox)
 
   return(discoverer)
 }
