@@ -179,12 +179,12 @@ get_id_column <- function(data, id=1){
 get_target_column <- function(data, target){
 
   # Check if column exists
-  if (!target %in% names(data)) stop("There is no such Target column", call. = FALSE)
+  if (any(!target %in% names(data))) stop("There is no such Target column", call. = FALSE)
 
   # Move column
-  index <- grep(target, names(data))
-  col_indexes <- 1:length(data)
-  col_order <- c(1, index, col_indexes[!col_indexes %in% c(1, index)])
+  target_index <- sapply(target, grep, names(data))
+  len <- seq_along(data)
+  col_order <- c(1, target_index, len[!len %in% c(1, target_index)])
   data <- data[ , col_order]
   return(data)
 }

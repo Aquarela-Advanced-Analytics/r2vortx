@@ -16,35 +16,14 @@
 #' get_col(col)
 #' }
 get_col <- function(col){
-  # (vector) -> string
-  # Input a character or vector of named columns
-  # Output a string in format ["col1", "col2", "col3"]
 
-  begin <- '['
-  string <- ''
-  i <- 1
-
-  if (length(col) == 1){
-    return(paste('[', '"', col, '"', ']', sep=''))
-  } else if(length(col) == 0){
-    return(NULL)
+  if (is.null(col)) {
+    return(col)
   }
+  inside <- paste0('"', col, '"', collapse = ',')
+  final <- paste0('[', inside, ']')
 
-  col <- unique(col)
-  while (i != length(col)+1){
-    item <- col[i]
-
-    if (i != length(col)){
-      string <- paste(string, '"', item, '"', ', ', sep='')
-    } else {
-      string <- paste(string, '"', item, '"', sep='')
-    }
-
-    i <- i + 1
-  }
-  end <- paste(begin, string, ']', sep='')
-
-  return(end)
+  return(final)
 }
 
 #' Helper Get Job ID
