@@ -35,7 +35,7 @@ get_textview_raw <- function(key, job, clusternum, start, end, vortx_server="pro
   } else {
     host_url <- vortx_server
   }
-  url <- paste0(host_url, "/discoverer/start")
+  url <- paste0(host_url, "/analyses/textview")
   job_body <- list(apikey = key,
                    jobid = get_job_id(job),
                    clusterid = get_cluster_id(clusternum),
