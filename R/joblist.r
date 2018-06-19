@@ -86,7 +86,6 @@ vortx_joblist <- function(key, archived='true', unarchived='true', vortx_server=
 
   # Selecting which variables to change to which type
   to_numeric <- c('rows', 'cols', 'rawModelVersion', 'estimatedTimeInMin')
-  print(result)
   to_factor <- c('jobType', 'status', 'visibility', 'archived')
   to_character <- c(!names(result) %in% c(to_numeric))
 
