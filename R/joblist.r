@@ -5,7 +5,7 @@
 #' @param key String. User API Key for VORTX.
 #' @param archived String Shows archived jobs. Default: 'true'
 #' @param unarchived String Shows unarchived jobs. Default: 'true'
-#' @param sandbox Choose TRUE if job is to be sent to sandbox instead
+#' @param vortx_server Choose server to run Vortx. Can be one of "production", "sandbox", "local" or desired URL.
 #' @return DataFrame. Available jobs with their respective Job IDs, name and description.
 #' @keywords internal
 #'
@@ -15,11 +15,19 @@
 #'
 #' get_joblist(mykey)
 #' }
-get_joblist <- function(key, archived='true', unarchived='true', sandbox=FALSE){
+get_joblist <- function(key, archived='true', unarchived='true', vortx_server="production"){
 
   # Temporary data
-  if (sandbox) sb <- "sandbox-" else sb <- ""
-  url <- paste("https://", sb, "api.vortx.io/jobs/list", sep="")
+  if (vortx_server == "production") {
+    host_url <- "https://api.vortx.io"
+  } else if (vortx_server == "sandbox") {
+    host_url <- "https://sandbox-api.vortx.io"
+  } else if (vortx_server == "local") {
+    host_url <- "localhost:8080"
+  } else {
+    host_url <- vortx_server
+  }
+  url <- paste0(host_url, "/jobs/list")
   job_body <- list(apikey = key,
                    archived = archived,
                    unarchived = unarchived)
@@ -38,7 +46,7 @@ get_joblist <- function(key, archived='true', unarchived='true', sandbox=FALSE){
 #' @param key String. User API Key for VORTX.
 #' @param archived String Shows archived jobs. Default: 'true'
 #' @param unarchived String Shows unarchived jobs. Default: 'true'
-#' @param sandbox Choose TRUE if job is to be sent to sandbox instead
+#' @param vortx_server Choose server to run Vortx. Can be one of "production", "sandbox", "local" or desired URL.
 #' @return DataFrame. Available jobs with their respective Job IDs, name and description.
 #' @export
 #'
@@ -48,10 +56,10 @@ get_joblist <- function(key, archived='true', unarchived='true', sandbox=FALSE){
 #'
 #' vortx_joblist(mykey)
 #' }
-vortx_joblist <- function(key, archived='true', unarchived='true', sandbox=FALSE){
+vortx_joblist <- function(key, archived='true', unarchived='true', vortx_server="production"){
 
   # Get parsed JSON
-  jobs <- get_joblist(key, archived, unarchived, sandbox)
+  jobs <- get_joblist(key, archived, unarchived, vortx_server)
 
   # Turn into something useful
   jobs2 <- list()
@@ -78,13 +86,14 @@ vortx_joblist <- function(key, archived='true', unarchived='true', sandbox=FALSE
 
   # Selecting which variables to change to which type
   to_numeric <- c('rows', 'cols', 'rawModelVersion', 'estimatedTimeInMin')
+  print(result)
   to_factor <- c('jobType', 'status', 'visibility', 'archived')
   to_character <- c(!names(result) %in% c(to_numeric))
 
   # Change types
-  result[,to_numeric] <- lapply(result[,to_numeric], as.numeric)
-  result[,to_character] <- lapply(result[,to_character], as.character)
-  result[,to_factor] <- lapply(result[,to_factor], factor)
+  result[to_numeric] <- lapply(result[to_numeric], as.numeric)
+  result[to_character] <- lapply(result[to_character], as.character)
+  result[to_factor] <- lapply(result[to_factor], factor)
 
   return(result)
 }

@@ -8,7 +8,7 @@
 #' result of organizer or discoverer functions.
 #' @param info String. Defines what kind of information to be extracted from job,
 #' between 'clusters', 'varscores', 'dataset' or 'summary'. Default is 'all'.
-#' @param sandbox Choose TRUE if job is to be sent to sandbox instead
+#' @param vortx_server Choose server to run Vortx. Can be one of "production", "sandbox", "local" or desired URL.
 #' @return List of DataFrames or DataFrame. If 'all' or 'summary' are defined, a list. Else specific DataFrame.
 #' @export
 #' @examples
@@ -24,12 +24,12 @@
 #' vortx_info(mykey, myjobid, info = 'clusters')
 #' vortx_info(mykey, myjob)
 #' }
-vortx_info <- function(key, job, info='all', sandbox=FALSE){
+vortx_info <- function(key, job, info='all', vortx_server="production"){
 
     # Temporary data
-    hierarchy <- get_hierarchy(key, job, sandbox)
-    metrics <- get_metrics(key, job, sandbox)
-    dataset <- get_dataset(key, job, sandbox)
+    hierarchy <- get_hierarchy(key, job, vortx_server)
+    metrics <- get_metrics(key, job, vortx_server)
+    dataset <- get_dataset(key, job, vortx_server)
     clusters <- levels(dataset[,'clusterId'])
 
     # Conditionals

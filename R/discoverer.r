@@ -8,7 +8,7 @@
 #' result of organizer or discoverer functions.
 #' @param target String. Name of column to be used as Target.
 #' @param ignoredcols String or Vector of strings. Optional name of columns to be ignored. Default is NULL.
-#' @param sandbox Choose TRUE if job is to be sent to sandbox instead
+#' @param vortx_server Choose server to run Vortx. Can be one of "production", "sandbox", "local" or desired URL.
 #' @return Job. Parsed content of API request, containing job information, such as job ID, used in other functions.
 #' @examples
 #' \dontrun{
@@ -22,14 +22,22 @@
 #'
 #' start_discoverer(mykey, myjob, myjobname, myjobdesc)
 #' }
-start_discoverer <- function(key, job, target, ignoredcols=NULL, sandbox=FALSE){
+start_discoverer <- function(key, job, target, ignoredcols=NULL, vortx_server="production"){
   # job can be either a list containing job data
   # or a character with jobid
 
   # Temporary data
   job_id <- get_job_id(job)
-  if (sandbox) sb <- "sandbox-" else sb <- ""
-  url <- paste("https://", sb, "api.vortx.io/discoverer/start", sep="")
+  if (vortx_server == "production") {
+    host_url <- "https://api.vortx.io"
+  } else if (vortx_server == "sandbox") {
+    host_url <- "https://sandbox-api.vortx.io"
+  } else if (vortx_server == "local") {
+    host_url <- "localhost:8080"
+  } else {
+    host_url <- vortx_server
+  }
+  url <- paste0(host_url, "/discoverer/start")
   job_body <- list(apikey = key,
                    jobid = job_id,
                    ignoredcols = get_col(ignoredcols),
@@ -65,7 +73,7 @@ start_discoverer <- function(key, job, target, ignoredcols=NULL, sandbox=FALSE){
 #' @param source String defining source. May contain 'excel' or 'googlesheets'. Default NULL for R.
 #' Use 'googlesheets_new' for new user.
 #' @param sheet String with number or name of sheet to be imported from source. Default NULL for first. Unnecessary for R.
-#' @param sandbox Choose TRUE if job is to be sent to sandbox instead
+#' @param vortx_server Choose server to run Vortx. Can be one of "production", "sandbox", "local" or desired URL.
 #' @return Job. Parsed content of API request, containing job information, such as job ID, used in other functions.
 #' @export
 #' @examples
@@ -77,7 +85,7 @@ start_discoverer <- function(key, job, target, ignoredcols=NULL, sandbox=FALSE){
 #'
 #' vortx_discoverer(mykey, df, myjobname, 'Alcohol', myjobdesc, 'Ash')
 #' }
-vortx_discoverer <- function(key, data, jobname, target, jobdesc=NULL, ignoredcols=NULL, id=1, source='r', sheet=NULL, sandbox=FALSE){
+vortx_discoverer <- function(key, data, jobname, target, jobdesc=NULL, ignoredcols=NULL, id=1, source='r', sheet=NULL, vortx_server="production"){
 
   # Check source
   file <- get_source(data, source, sheet)
@@ -101,9 +109,9 @@ vortx_discoverer <- function(key, data, jobname, target, jobdesc=NULL, ignoredco
   file <- rename_ignored(file, ignoredcols)
 
   # Create job and run discoverer
-  job <- create_job(key, file, jobname, jobdesc, sandbox)
+  job <- create_job(key, file, jobname, jobdesc, vortx_server)
   job_id <- get_job_id(job)
-  discoverer <- start_discoverer(key=key, job=job_id, target=target, ignoredcols=NULL, sandbox=sandbox)
+  discoverer <- start_discoverer(key=key, job=job_id, target=target, ignoredcols=NULL, vortx_server=vortx_server)
 
   return(discoverer)
 }

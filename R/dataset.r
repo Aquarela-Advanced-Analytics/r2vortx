@@ -9,7 +9,7 @@
 #' @param clusternum Integer or String. Can be cluster number (int) or cluster name in format 'cluster-x'.
 #' @param start Integer. Starting row to get info from.
 #' @param end Integer. Ending row to get info from.
-#' @param sandbox Choose TRUE if job is to be sent to sandbox instead
+#' @param vortx_server Choose server to run Vortx. Can be one of "production", "sandbox", "local" or desired URL.
 #' @return List of parsed JSON.
 #' @examples
 #' \dontrun{
@@ -23,11 +23,19 @@
 #'
 #' get_textview_raw(mykey, myjob, 1, 1, 10)
 #' }
-get_textview_raw <- function(key, job, clusternum, start, end, sandbox=FALSE){
+get_textview_raw <- function(key, job, clusternum, start, end, vortx_server="production"){
 
   # Temporary data
-  if (sandbox) sb <- "sandbox-" else sb <- ""
-  url <- paste("https://", sb, "api.vortx.io/analyses/textview", sep="")
+  if (vortx_server == "production") {
+    host_url <- "https://api.vortx.io"
+  } else if (vortx_server == "sandbox") {
+    host_url <- "https://sandbox-api.vortx.io"
+  } else if (vortx_server == "local") {
+    host_url <- "localhost:8080"
+  } else {
+    host_url <- vortx_server
+  }
+  url <- paste0(host_url, "/discoverer/start")
   job_body <- list(apikey = key,
                    jobid = get_job_id(job),
                    clusterid = get_cluster_id(clusternum),
@@ -56,7 +64,7 @@ get_textview_raw <- function(key, job, clusternum, start, end, sandbox=FALSE){
 #' @param clusternum Integer or String. Can be cluster number (int) or cluster name in format 'cluster-x'.
 #' @param start Integer. Starting row to get info from.
 #' @param end Integer. Ending row to get info from.
-#' @param sandbox Choose TRUE if job is to be sent to sandbox instead
+#' @param vortx_server Choose server to run Vortx. Can be one of "production", "sandbox", "local" or desired URL.
 #' @return DataFrame of a cluster dataset
 #' @examples
 #' \dontrun{
@@ -70,10 +78,10 @@ get_textview_raw <- function(key, job, clusternum, start, end, sandbox=FALSE){
 #'
 #' get_dataset_single(mykey, myjob, 1, 1, 10)
 #' }
-get_dataset_single <- function(key, job, clusternum, start, end, sandbox=FALSE){
+get_dataset_single <- function(key, job, clusternum, start, end, vortx_server="production"){
 
   # Get raw information
-  textview <- get_textview_raw(key, job, clusternum, start, end, sandbox)
+  textview <- get_textview_raw(key, job, clusternum, start, end, vortx_server)
 
   # Make the dataset
   df <- do.call(rbind.data.frame, textview)
@@ -94,7 +102,7 @@ get_dataset_single <- function(key, job, clusternum, start, end, sandbox=FALSE){
 #' @param job String or List. Can be either a job ID number
 #' in string format or parsed JSON in list format,
 #' result of organizer or discoverer functions.
-#' @param sandbox Choose TRUE if job is to be sent to sandbox instead
+#' @param vortx_server Choose server to run Vortx. Can be one of "production", "sandbox", "local" or desired URL.
 #' @return DataFrame of a job dataset
 #' @examples
 #' \dontrun{
@@ -108,10 +116,10 @@ get_dataset_single <- function(key, job, clusternum, start, end, sandbox=FALSE){
 #'
 #' get_dataset(mykey, myjob)
 #' }
-get_dataset <- function(key, job, sandbox=FALSE){
+get_dataset <- function(key, job, vortx_server="production"){
 
   # Temporary data
-  hierarchy <- get_hierarchy(key, job, sandbox)
+  hierarchy <- get_hierarchy(key, job, vortx_server)
   clusters <- as.character(hierarchy[-1,1])
   size <- as.character(hierarchy[-1, 3])
 
@@ -121,7 +129,7 @@ get_dataset <- function(key, job, sandbox=FALSE){
   while (i <= length(clusters)){
     name <- clusters[i]
     end <- size[i]
-    data[[i]] <- get_dataset_single(key, job, name, '1', end, sandbox)
+    data[[i]] <- get_dataset_single(key, job, name, '1', end, vortx_server)
     i <- i + 1
   }
   df <- do.call(rbind.data.frame, data)
@@ -129,7 +137,7 @@ get_dataset <- function(key, job, sandbox=FALSE){
   row.names(df) <- rows
 
   # Adjust type of dataset variables
-  summary_raw <- get_summaryview_raw(key, job, 1, sandbox)
+  summary_raw <- get_summaryview_raw(key, job, 1, vortx_server)
   summary <- data.frame(do.call(rbind, summary_raw$vars))[,-3]
   var_names <- summary[[1]]
   var_types <- summary[[2]]

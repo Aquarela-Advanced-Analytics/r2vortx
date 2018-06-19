@@ -4,7 +4,7 @@
 \alias{get_summaryview_single}
 \title{Get Cluster's Summaryview}
 \usage{
-get_summaryview_single(key, job, clusternum, sandbox = FALSE)
+get_summaryview_single(key, job, clusternum, vortx_server = "production")
 }
 \arguments{
 \item{key}{String. User API Key for VORTX.}
@@ -15,7 +15,7 @@ result of organizer or discoverer functions.}
 
 \item{clusternum}{Integer or String. Can be cluster number (int) or cluster name in format 'cluster-x'.}
 
-\item{sandbox}{Choose TRUE if job is to be sent to sandbox instead}
+\item{vortx_server}{Choose server to run Vortx. Can be one of "production", "sandbox", "local" or desired URL.}
 }
 \value{
 List of DataFrames.

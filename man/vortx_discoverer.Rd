@@ -6,7 +6,7 @@
 \usage{
 vortx_discoverer(key, data, jobname, target, jobdesc = NULL,
   ignoredcols = NULL, id = 1, source = "r", sheet = NULL,
-  sandbox = FALSE)
+  vortx_server = "production")
 }
 \arguments{
 \item{key}{String. User API Key for VORTX.}
@@ -30,7 +30,7 @@ Use 'googlesheets_new' for new user.}
 
 \item{sheet}{String with number or name of sheet to be imported from source. Default NULL for first. Unnecessary for R.}
 
-\item{sandbox}{Choose TRUE if job is to be sent to sandbox instead}
+\item{vortx_server}{Choose server to run Vortx. Can be one of "production", "sandbox", "local" or desired URL.}
 }
 \value{
 Job. Parsed content of API request, containing job information, such as job ID, used in other functions.

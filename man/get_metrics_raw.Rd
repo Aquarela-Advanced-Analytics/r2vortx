@@ -4,7 +4,7 @@
 \alias{get_metrics_raw}
 \title{Get Raw Metrics of Clusters}
 \usage{
-get_metrics_raw(key, job, sandbox = FALSE)
+get_metrics_raw(key, job, vortx_server = "production")
 }
 \arguments{
 \item{key}{String. User API Key for VORTX.}
@@ -13,7 +13,7 @@ get_metrics_raw(key, job, sandbox = FALSE)
 in string format or parsed JSON in list format,
 result of organizer or discoverer functions.}
 
-\item{sandbox}{Choose TRUE if job is to be sent to sandbox instead}
+\item{vortx_server}{Choose server to run Vortx. Can be one of "production", "sandbox", "local" or desired URL.}
 }
 \value{
 List of parsed JSON.

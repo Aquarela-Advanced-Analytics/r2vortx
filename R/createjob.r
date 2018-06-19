@@ -6,7 +6,7 @@
 #' @param data DataFrame. Data to be created as a job.
 #' @param jobname String. Title of job to be created.
 #' @param jobdesc String. Description of job to be created. Optional. Default NULL.
-#' @param sandbox Choose TRUE if job is to be sent to sandbox instead
+#' @param vortx_server Choose server to run Vortx. Can be one of "production", "sandbox", "local" or desired URL.
 #' @return Job. Parsed content of API request, containing job information, such as job ID, used in other functions.
 #' @examples
 #' \dontrun{
@@ -17,7 +17,7 @@
 #'
 #' create_job(mykey, df, myjobname, myjobdesc)
 #' }
-create_job <- function(key, data, jobname, jobdesc=NULL, sandbox=FALSE){
+create_job <- function(key, data, jobname, jobdesc=NULL, vortx_server="production"){
 
   # Write temporary .csv file
   temp <- tempfile(pattern = 'vortxjob', tmpdir = tempdir(), fileext = '.csv')
@@ -25,8 +25,16 @@ create_job <- function(key, data, jobname, jobdesc=NULL, sandbox=FALSE){
   job_csv <- httr::upload_file(temp, 'text/csv')
 
   # Body of request
-  if (sandbox) sb <- "sandbox-" else sb <- ""
-  url <- paste("https://", sb, "api.vortx.io/jobs/create", sep="")
+  if (vortx_server == "production") {
+    host_url <- "https://api.vortx.io"
+  } else if (vortx_server == "sandbox") {
+    host_url <- "https://sandbox-api.vortx.io"
+  } else if (vortx_server == "local") {
+    host_url <- "localhost:8080"
+  } else {
+    host_url <- vortx_server
+  }
+  url <- paste0(host_url, "/jobs/create")
   job_body <- list(apikey = key,
                    name = jobname,
                    description = jobdesc,

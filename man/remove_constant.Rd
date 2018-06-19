@@ -6,6 +6,9 @@
 \usage{
 remove_constant(data)
 }
+\arguments{
+\item{data}{data to remove constant}
+}
 \value{
 List with DataFrame with removed column and the name of the column
 }

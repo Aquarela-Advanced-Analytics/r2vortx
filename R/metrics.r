@@ -6,7 +6,7 @@
 #' @param job String or List. Can be either a job ID number
 #' in string format or parsed JSON in list format,
 #' result of organizer or discoverer functions.
-#' @param sandbox Choose TRUE if job is to be sent to sandbox instead
+#' @param vortx_server Choose server to run Vortx. Can be one of "production", "sandbox", "local" or desired URL.
 #' @return List of parsed JSON.
 #' @keywords internal
 #' @examples
@@ -21,11 +21,19 @@
 #'
 #' get_metrics_raw(mykey, myjob)
 #' }
-get_metrics_raw <- function(key, job, sandbox=FALSE){
+get_metrics_raw <- function(key, job, vortx_server="production"){
 
   # Temporary data
-  if (sandbox) sb <- "sandbox-" else sb <- ""
-  url <- paste("https://", sb, "api.vortx.io/analyses/metrics", sep="")
+  if (vortx_server == "production") {
+    host_url <- "https://api.vortx.io"
+  } else if (vortx_server == "sandbox") {
+    host_url <- "https://sandbox-api.vortx.io"
+  } else if (vortx_server == "local") {
+    host_url <- "localhost:8080"
+  } else {
+    host_url <- vortx_server
+  }
+  url <- paste0(host_url, "/analyses/metrics")
   job_body <- list(apikey = key,
                    jobid = get_job_id(job))
 
@@ -43,7 +51,7 @@ get_metrics_raw <- function(key, job, sandbox=FALSE){
 #' @param job String or List. Can be either a job ID number
 #' in string format or parsed JSON in list format,
 #' result of organizer or discoverer functions.
-#' @param sandbox Choose TRUE if job is to be sent to sandbox instead
+#' @param vortx_server Choose server to run Vortx. Can be one of "production", "sandbox", "local" or desired URL.
 #' @return DataFrame.
 #' @keywords internal
 #' @examples
@@ -58,9 +66,9 @@ get_metrics_raw <- function(key, job, sandbox=FALSE){
 #'
 #' get_metrics(mykey, myjob)
 #' }
-get_metrics <- function(key, job, sandbox=FALSE){
+get_metrics <- function(key, job, vortx_server="production"){
 
-  metrics <- get_metrics_raw(key, job, sandbox)
+  metrics <- get_metrics_raw(key, job, vortx_server)
 
   df <- data.frame(do.call(rbind, metrics$dimSharpness))
   df$sharpness <- as.numeric(df$sharpness)
