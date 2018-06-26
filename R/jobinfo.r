@@ -7,9 +7,9 @@
 #' in string format or parsed JSON in list format,
 #' result of organizer or discoverer functions.
 #' @param info String. Defines what kind of information to be extracted from job,
-#' between 'clusters', 'varscores', 'dataset' or 'summary'. Default is 'all'.
+#' between 'clusters', 'varscores', 'dataset' or 'summary'. Default is all.
 #' @param vortx_server Choose server to run Vortx. Can be one of "production", "sandbox", "local" or desired URL.
-#' @return List of DataFrames or DataFrame. If 'all' or 'summary' are defined, a list. Else specific DataFrame.
+#' @return List of DataFrames or DataFrame.
 #' @export
 #' @examples
 #' \dontrun{
@@ -24,45 +24,45 @@
 #' vortx_info(mykey, myjobid, info = 'clusters')
 #' vortx_info(mykey, myjob)
 #' }
-vortx_info <- function(key, job, info='all', vortx_server="production"){
+vortx_info <- function(key, job, info=c("clusters", "varscores", "dataset", "summary"), vortx_server="production"){
 
-    # Temporary data
+  # Initialize data
+  ls <- list()
+
+  # Get necessary data
+  if ("clusters" %in% info) {
     hierarchy <- get_hierarchy(key, job, vortx_server)
+    ls[["Clusters"]] <- hierarchy
+  }
+
+  if ("varscores" %in% info) {
     metrics <- get_metrics(key, job, vortx_server)
+    ls[['VarScores']] <- metrics
+  }
+
+  if (any(c("dataset", "summary") %in% info)) {
     dataset <- get_dataset(key, job, vortx_server)
     clusters <- levels(dataset[,'clusterId'])
 
-    # Conditionals
-    if (info == 'clusters'){
-        return(hierarchy)
+    if ("dataset" %in% info) {
+      ls[['Dataset']] <- dataset
     }
 
-    if (info == 'varscores'){
-        return(metrics)
-    }
-
-    if (info == 'dataset'){
-        return(dataset)
-    }
-
-    # Summary for last to save requests if unnecessary
-    summary <- list()
-    for (i in clusters){
+    if ("summary" %in% info) {
+      summary <- list()
+      for (i in clusters){
         name <- i
         cluster_name <- gsub('-', '', name)
         summary[[cluster_name]] <- get_summaryview_single(key, job, name)
+      }
+      ls[['Summary']] <- summary
     }
-    if (info == 'summary'){
-        return(summary)
-    }
+  }
 
-    # Function response
-    ls <- list()
-    ls[['Clusters']] <- hierarchy
-    ls[['VarScores']] <- metrics
-    ls[['Dataset']] <- dataset
-    ls[['Summary']] <- summary
-
+  # Return final object
+  if (length(ls) == 1) {
+    return(ls[[1]])
+  } else {
     return(ls)
-
+  }
 }

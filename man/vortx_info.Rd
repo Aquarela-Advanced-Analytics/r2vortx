@@ -4,7 +4,8 @@
 \alias{vortx_info}
 \title{Get information}
 \usage{
-vortx_info(key, job, info = "all", vortx_server = "production")
+vortx_info(key, job, info = c("clusters", "varscores", "dataset", "summary"),
+  vortx_server = "production")
 }
 \arguments{
 \item{key}{String. User API Key for VORTX.}
@@ -14,12 +15,12 @@ in string format or parsed JSON in list format,
 result of organizer or discoverer functions.}
 
 \item{info}{String. Defines what kind of information to be extracted from job,
-between 'clusters', 'varscores', 'dataset' or 'summary'. Default is 'all'.}
+between 'clusters', 'varscores', 'dataset' or 'summary'. Default is all.}
 
 \item{vortx_server}{Choose server to run Vortx. Can be one of "production", "sandbox", "local" or desired URL.}
 }
 \value{
-List of DataFrames or DataFrame. If 'all' or 'summary' are defined, a list. Else specific DataFrame.
+List of DataFrames or DataFrame.
 }
 \description{
 Gets information on a VORTX job
