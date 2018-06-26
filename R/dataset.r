@@ -84,7 +84,14 @@ get_dataset_single <- function(key, job, clusternum, start, end, vortx_server="p
   textview <- get_textview_raw(key, job, clusternum, start, end, vortx_server)
 
   # Make the dataset
-  df <- do.call(rbind.data.frame, textview)
+  df <- data.frame(
+    matrix(
+      data = unlist(textview),
+      nrow = length(textview),
+      byrow = TRUE
+    ),
+    stringsAsFactors = FALSE
+  )
   names(df) <- unlist(textview[[1]])
   df <- df[-1, ]
   names <- c(1:length(df[,1]))
