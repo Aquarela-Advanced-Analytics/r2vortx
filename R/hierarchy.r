@@ -29,7 +29,7 @@ get_hierarchy_raw <- function(key, job, vortx_server="production"){
   } else if (vortx_server == "sandbox") {
     host_url <- "https://sandbox-api.vortx.io"
   } else if (vortx_server == "local") {
-    host_url <- "localhost:8080"
+    host_url <- "http://localhost:8080"
   } else {
     host_url <- vortx_server
   }

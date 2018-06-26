@@ -33,7 +33,7 @@ start_discoverer <- function(key, job, target, ignoredcols=NULL, vortx_server="p
   } else if (vortx_server == "sandbox") {
     host_url <- "https://sandbox-api.vortx.io"
   } else if (vortx_server == "local") {
-    host_url <- "localhost:8080"
+    host_url <- "http://localhost:8080"
   } else {
     host_url <- vortx_server
   }
