@@ -10,7 +10,7 @@
 #' df <- r2vortx::wine
 #' refine_push(df, 'Nameless Project')
 #' }
-refine_push <- function(data, name=NULL){
+refine_push <- function(data, name=NULL, base_url='http://localhost:3333'){
 
   # Set temporary data file
   temp <- tempfile(pattern = 'refineproject', tmpdir = tempdir(), fileext = '.csv')
@@ -18,7 +18,8 @@ refine_push <- function(data, name=NULL){
   proj_csv <- httr::upload_file(temp, 'text/csv')
 
   # Set parameters for request
-  url <- 'http://localhost:3333/command/core/create-project-from-upload'
+  base_url = sub('/$', '', base_url)
+  url <- paste0(base_url, '/command/core/create-project-from-upload')
   body <- list('project-file' = proj_csv,
                'project-name' = name)
 
@@ -48,10 +49,11 @@ refine_push <- function(data, name=NULL){
 #' \dontrun{
 #' df <- refine_pull('1622372310646')
 #' }
-refine_pull <- function(name=NULL, id=NULL, encoding='UTF-8'){
+refine_pull <- function(name=NULL, id=NULL, encoding='UTF-8', base_url='http://localhost:3333'){
 
   # Set parameters for request
-  url <- 'http://localhost:3333/command/core/export-rows'
+  base_url = sub('/$', '', base_url)
+  url <- paste0(base_url, '/command/core/export-rows')
   engine <- list(facets = "", mode = "row-based")
   project_id <- get_refine_id(name, id)
   body <-    c(project = project_id,
@@ -78,9 +80,11 @@ refine_pull <- function(name=NULL, id=NULL, encoding='UTF-8'){
 #'
 #' @export
 #' @return DataFrame with projects' ID, Name, Last Modified and Number of Rows
-refine_list <- function(){
+refine_list <- function(base_url='http://localhost:3333'){
 
-  cont <- httr::content(httr::GET('http://localhost:3333/command/core/get-all-project-metadata'))
+  base_url = sub('/$', '', base_url)
+  url <- paste0(base_url, '/command/core/get-all-project-metadata')
+  cont <- httr::content(httr::GET(url))
 
   projects <- data.frame(do.call(rbind, cont$projects))
   projects$ID <- row.names(projects)
@@ -104,10 +108,11 @@ refine_list <- function(){
 #' @param name String. Name of project in OpenRefine. Either name or ID must be given.
 #' @param id String. ID of project in OpenRefine. Obtainable by clicking 'About' in OpenRefine. Either name or ID must be given.
 #' @export
-refine_kill <- function(name=NULL, id=NULL){
+refine_kill <- function(name=NULL, id=NULL, base_url='http://localhost:3333'){
 
   # Set parameters
-  url <- 'http://localhost:3333/command/core/delete-project'
+  base_url = sub('/$', '', base_url)
+  url <- paste0(base_url, '/command/core/delete-project')
   project_id <- get_refine_id(name, id)
   body <- list(project = project_id)
 
@@ -131,14 +136,16 @@ refine_kill <- function(name=NULL, id=NULL){
 #' \dontrun{
 #' refine_mime(df, 'diamonds')
 #' }
-refine_mime <- function(data, mime.name=NULL, mime.id=NULL){
+refine_mime <- function(data, mime.name=NULL, mime.id=NULL, base_url='http://localhost:3333'){
 
   # Send data
   refine_push(data, 'Temporary')
 
   # Get operations from mime
   mime_id <- get_refine_id(mime.name, mime.id)
-  operations <- httr::GET('http://localhost:3333/command/core/get-operations',
+  base_url = sub('/$', '', base_url)
+  operations_url <- paste0(base_url, '/command/core/get-operations')
+  operations <- httr::GET(operations_url,
                           query=list(project=mime_id))
   operations <- httr::content(operations, 'text')
   operations <- jsonlite::fromJSON(operations)
@@ -146,7 +153,8 @@ refine_mime <- function(data, mime.name=NULL, mime.id=NULL){
 
   # Apply operations on new data
   new_id <- get_refine_id('Temporary')
-  httr::POST(url = 'http://localhost:3333/command/core/apply-operations?',
+  apply_url <- paste0(base_url, '/command/core/apply-operations?')
+  httr::POST(url = apply_url,
              body = list(project=new_id, operations=operations),
              encode='form')
   message('Changes being applied...')
