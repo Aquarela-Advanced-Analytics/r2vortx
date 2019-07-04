@@ -173,7 +173,7 @@ refine_mime <- function(data, mime.name=NULL, mime.id=NULL, base_url='http://loc
 #' @param project_id String with project ID
 #' @return String with project ID
 #' @keywords internal
-get_refine_id <- function(project_name=NULL, project_id=NULL ){
+get_refine_id <- function(project_name=NULL, project_id=NULL, base_url='localhost:3333'){
 
   # If nothing is given, return error
   if (is.null(project_id) & is.null(project_name)){
@@ -181,7 +181,7 @@ get_refine_id <- function(project_name=NULL, project_id=NULL ){
 
   # If only name is given, get ID from metadata
   } else if (is.null(project_id) & !is.null(project_name)){
-    proj_list <- refine_list()
+    proj_list <- refine_list(base_url = base_url)
 
     # If there's no matching name, return error
     if (length(which(proj_list$Name == project_name)) == 0){
