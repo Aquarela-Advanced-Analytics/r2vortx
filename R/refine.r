@@ -161,7 +161,7 @@ refine_mime <- function(data, mime.name=NULL, mime.id=NULL, base_url='http://loc
   message('Changes being applied...')
 
   # Get data back and delete project
-  new_data <- refine_pull(id=new_id)
+  new_data <- refine_pull(id=new_id, base_url = base_url)
   refine_kill(id=new_id)
   return(new_data)
 
