@@ -185,17 +185,17 @@ get_refine_id <- function(project_name=NULL, project_id=NULL, base_url='localhos
     proj_list <- refine_list(base_url = base_url)
 
     # If there's no matching name, return error
-    if (length(which(proj_list$Name == project_name)) == 0){
+    if (length(which(proj_list$name == project_name)) == 0){
       stop('There is no matching name.')
 
     # If there's only one match, return ID
-    } else if (length(which(proj_list$Name == project_name)) == 1){
-      return(proj_list[proj_list$Name == project_name, 'ID'])
+    } else if (length(which(proj_list$name == project_name)) == 1){
+      return(proj_list[proj_list$name == project_name, 'ID'])
 
     # If there's more than one match, return latest
-    } else if (length(which(proj_list$Name == project_name)) > 1){
+    } else if (length(which(proj_list$name == project_name)) > 1){
       message('There is more than one matching name. Returning latest.')
-      return(proj_list[proj_list$Name == project_name, 'ID'][[1]])
+      return(proj_list[proj_list$name == project_name, 'ID'][[1]])
     }
 
   # Finally, if ID has been given, return ID
