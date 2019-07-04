@@ -153,7 +153,7 @@ refine_mime <- function(data, mime.name=NULL, mime.id=NULL, base_url='http://loc
   operations <- jsonlite::toJSON(operations$entries$operation)
 
   # Apply operations on new data
-  new_id <- get_refine_id('Temporary')
+  new_id <- get_refine_id('Temporary', base_url = base_url)
   apply_url <- paste0(base_url, '/command/core/apply-operations?')
   httr::POST(url = apply_url,
              body = list(project=new_id, operations=operations),
