@@ -143,7 +143,7 @@ refine_mime <- function(data, mime.name=NULL, mime.id=NULL, base_url='http://loc
   refine_push(data, 'Temporary')
 
   # Get operations from mime
-  mime_id <- get_refine_id(mime.name, mime.id)
+  mime_id <- get_refine_id(mime.name, mime.id, base_url = base_url)
   base_url = sub('/$', '', base_url)
   operations_url <- paste0(base_url, '/command/core/get-operations')
   operations <- httr::GET(operations_url,
