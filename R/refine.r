@@ -139,12 +139,13 @@ refine_kill <- function(name=NULL, id=NULL, base_url='http://localhost:3333'){
 #' }
 refine_mime <- function(data, mime.name=NULL, mime.id=NULL, base_url='http://localhost:3333'){
 
+  base_url = sub('/$', '', base_url)
+
   # Send data
-  refine_push(data, 'Temporary')
+  refine_push(data, 'Temporary', base_url=base_url)
 
   # Get operations from mime
-  mime_id <- get_refine_id(mime.name, mime.id, base_url = base_url)
-  base_url = sub('/$', '', base_url)
+  mime_id <- get_refine_id(mime.name, mime.id, base_url=base_url)
   operations_url <- paste0(base_url, '/command/core/get-operations')
   operations <- httr::GET(operations_url,
                           query=list(project=mime_id))
