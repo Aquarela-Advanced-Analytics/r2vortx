@@ -84,17 +84,18 @@ refine_list <- function(base_url='http://localhost:3333'){
 
   base_url = sub('/$', '', base_url)
   url <- paste0(base_url, '/command/core/get-all-project-metadata')
-  cont <- httr::content(httr::GET(url))
+  cont <- httr::content(httr::GET(url), as = 'parsed')
 
   projects <- data.frame(do.call(rbind, cont$projects))
-  projects$ID <- row.names(projects)
-  projects <- projects[, c('ID', 'name', 'modified', 'rowCount')]
-  names(projects) <- c('ID', 'Name', 'Modified', 'Rows')
-  projects$ID <- as.character(projects$ID)
-  projects$Name <- as.character(projects$Name)
-  projects$Modified <- as.character(projects$Modified)
-  projects$Rows <- as.integer(projects$Rows)
-  projects <- projects[order(projects$Modified, decreasing=TRUE), ]
+  projects$id <- row.names(projects)
+  # projects <- projects[, c('ID', 'name', 'modified', 'rowCount')]
+  projects <- projects[, c('id', 'name', 'modified', 'customMetadata')]
+  names(projects) <- c('id', 'name', 'modified', 'custom_metadata')
+  projects$id <- as.character(projects$id)
+  projects$name <- as.character(projects$name)
+  projects$modified <- as.character(projects$modified)
+  # projects$Rows <- as.integer(projects$rows)
+  projects <- projects[order(projects$modified, decreasing=TRUE), ]
   row.names(projects) <- c(1:length(projects[[1]]))
 
   return(projects)
