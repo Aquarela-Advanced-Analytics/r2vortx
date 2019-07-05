@@ -6,7 +6,9 @@
 #' @param job String or List. Can be either a job ID number
 #' in string format or parsed JSON in list format,
 #' result of organizer or discoverer functions.
+#' @param vortx_server Choose server to run Vortx. Can be one of "production", "sandbox", "local" or desired URL.
 #' @return List of parsed JSON.
+#' @keywords internal
 #' @examples
 #' \dontrun{
 #' mykey <- '1234567890abcefghijkl'
@@ -19,10 +21,19 @@
 #'
 #' get_hierarchy_raw(mykey, myjob)
 #' }
-get_hierarchy_raw <- function(key, job){
+get_hierarchy_raw <- function(key, job, vortx_server="production"){
 
   # Temporary data
-  url <- 'https://api.vortx.io/analyses/hierarchy'
+  if (vortx_server == "production") {
+    host_url <- "https://api.vortx.io"
+  } else if (vortx_server == "sandbox") {
+    host_url <- "https://sandbox-api.vortx.io"
+  } else if (vortx_server == "local") {
+    host_url <- "http://localhost:8080"
+  } else {
+    host_url <- vortx_server
+  }
+  url <- paste0(host_url, "/analyses/hierarchy")
   job_body <- list(apikey = key,
                    jobid = get_job_id(job))
 
@@ -41,6 +52,8 @@ get_hierarchy_raw <- function(key, job){
 #' @param job String or List. Can be either a job ID number
 #' in string format or parsed JSON in list format,
 #' result of organizer or discoverer functions.
+#' @param vortx_server Choose server to run Vortx. Can be one of "production", "sandbox", "local" or desired URL.
+#' @keywords internal
 #' @return DataFrame.
 #' @examples
 #' \dontrun{
@@ -54,9 +67,9 @@ get_hierarchy_raw <- function(key, job){
 #'
 #' get_hierarchy(mykey, myjob)
 #' }
-get_hierarchy <- function(key, job){
+get_hierarchy <- function(key, job, vortx_server="production"){
 
-  hierarchy <- get_hierarchy_raw(key, job)
+  hierarchy <- get_hierarchy_raw(key, job, vortx_server)
 
   clusters_outer <- hierarchy$children
   clusters_inner <- hierarchy$children[[1]]$children

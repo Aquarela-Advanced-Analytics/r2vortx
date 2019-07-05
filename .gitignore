@@ -4,3 +4,5 @@
 .Ruserdata
 .Rbuildignore
 scrapbook.R
+.httr-oauth
+.httr-oauth-SUSPENDED

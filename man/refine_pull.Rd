@@ -4,7 +4,8 @@
 \alias{refine_pull}
 \title{Pull data from OpenRefine to R}
 \usage{
-refine_pull(name = NULL, id = NULL, encoding = "UTF-8")
+refine_pull(name = NULL, id = NULL, encoding = "UTF-8",
+  base_url = "http://localhost:3333")
 }
 \arguments{
 \item{name}{String. Name of project in OpenRefine. Either name or ID must be given.}
@@ -12,6 +13,8 @@ refine_pull(name = NULL, id = NULL, encoding = "UTF-8")
 \item{id}{String. ID of project in OpenRefine. Obtainable by clicking 'About' in OpenRefine. Either name or ID must be given.}
 
 \item{encoding}{String. Encoding of uploaded file. Default is UTF-8.}
+
+\item{base_url}{Base url for openrefine server}
 }
 \value{
 DataFrame of dataset in OpenRefine

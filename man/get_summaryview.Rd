@@ -4,7 +4,7 @@
 \alias{get_summaryview}
 \title{Get full Summaryview}
 \usage{
-get_summaryview(key, job)
+get_summaryview(key, job, vortx_server = "production")
 }
 \arguments{
 \item{key}{String. User API Key for VORTX.}
@@ -12,6 +12,8 @@ get_summaryview(key, job)
 \item{job}{String or List. Can be either a job ID number
 in string format or parsed JSON in list format,
 result of organizer or discoverer functions.}
+
+\item{vortx_server}{Choose server to run Vortx. Can be one of "production", "sandbox", "local" or desired URL.}
 }
 \value{
 List of DataFrames.
@@ -32,3 +34,4 @@ myjob <- vortx_create_job(mykey, df, myjobname, myjobdesc)
 get_summaryview(mykey, myjob)
 }
 }
+\keyword{internal}

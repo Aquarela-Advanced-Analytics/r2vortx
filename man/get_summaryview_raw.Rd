@@ -4,7 +4,7 @@
 \alias{get_summaryview_raw}
 \title{Get Raw Summaryview}
 \usage{
-get_summaryview_raw(key, job, clusternum)
+get_summaryview_raw(key, job, clusternum, vortx_server = "production")
 }
 \arguments{
 \item{key}{String. User API Key for VORTX.}
@@ -14,6 +14,8 @@ in string format or parsed JSON in list format,
 result of organizer or discoverer functions.}
 
 \item{clusternum}{Integer or String. Can be cluster number (int) or cluster name in format 'cluster-x'.}
+
+\item{vortx_server}{Choose server to run Vortx. Can be one of "production", "sandbox", "local" or desired URL.}
 }
 \value{
 List of parsed JSON.
@@ -34,3 +36,4 @@ myjob <- vortx_create_job(mykey, df, myjobname, myjobdesc)
 get_summaryview_raw(mykey, myjob, 1, 1, 10)
 }
 }
+\keyword{internal}

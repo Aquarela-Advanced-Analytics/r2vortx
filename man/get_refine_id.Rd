@@ -4,12 +4,15 @@
 \alias{get_refine_id}
 \title{Gets ID from project in OpenRefine}
 \usage{
-get_refine_id(project_name = NULL, project_id = NULL)
+get_refine_id(project_name = NULL, project_id = NULL,
+  base_url = "localhost:3333")
 }
 \arguments{
 \item{project_name}{String with project Name}
 
 \item{project_id}{String with project ID}
+
+\item{base_url}{Base url for openrefine server}
 }
 \value{
 String with project ID
@@ -17,3 +20,4 @@ String with project ID
 \description{
 Gets ID from project in OpenRefine
 }
+\keyword{internal}

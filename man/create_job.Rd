@@ -4,7 +4,8 @@
 \alias{create_job}
 \title{Create job}
 \usage{
-create_job(key, data, jobname, jobdesc = NULL)
+create_job(key, data, jobname, jobdesc = NULL,
+  vortx_server = "production")
 }
 \arguments{
 \item{key}{String. User API Key for VORTX.}
@@ -14,6 +15,8 @@ create_job(key, data, jobname, jobdesc = NULL)
 \item{jobname}{String. Title of job to be created.}
 
 \item{jobdesc}{String. Description of job to be created. Optional. Default NULL.}
+
+\item{vortx_server}{Choose server to run Vortx. Can be one of "production", "sandbox", "local" or desired URL.}
 }
 \value{
 Job. Parsed content of API request, containing job information, such as job ID, used in other functions.

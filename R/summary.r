@@ -7,7 +7,9 @@
 #' in string format or parsed JSON in list format,
 #' result of organizer or discoverer functions.
 #' @param clusternum Integer or String. Can be cluster number (int) or cluster name in format 'cluster-x'.
+#' @param vortx_server Choose server to run Vortx. Can be one of "production", "sandbox", "local" or desired URL.
 #' @return List of parsed JSON.
+#' @keywords internal
 #' @examples
 #' \dontrun{
 #' mykey <- '1234567890abcefghijkl'
@@ -20,10 +22,19 @@
 #'
 #' get_summaryview_raw(mykey, myjob, 1, 1, 10)
 #' }
-get_summaryview_raw <- function(key, job, clusternum){
+get_summaryview_raw <- function(key, job, clusternum, vortx_server="production"){
 
   # Temporary data
-  url <- 'https://api.vortx.io/analyses/summaryview'
+  if (vortx_server == "production") {
+    host_url <- "https://api.vortx.io"
+  } else if (vortx_server == "sandbox") {
+    host_url <- "https://sandbox-api.vortx.io"
+  } else if (vortx_server == "local") {
+    host_url <- "http://localhost:8080"
+  } else {
+    host_url <- vortx_server
+  }
+  url <- paste0(host_url, "/analyses/summaryview")
   job_body <- list(apikey = key,
                    jobid = get_job_id(job),
                    clusterid = get_cluster_id(clusternum))
@@ -43,7 +54,9 @@ get_summaryview_raw <- function(key, job, clusternum){
 #' in string format or parsed JSON in list format,
 #' result of organizer or discoverer functions.
 #' @param clusternum Integer or String. Can be cluster number (int) or cluster name in format 'cluster-x'.
+#' @param vortx_server Choose server to run Vortx. Can be one of "production", "sandbox", "local" or desired URL.
 #' @return List of DataFrames.
+#' @keywords internal
 #' @examples
 #' \dontrun{
 #' mykey <- '1234567890abcefghijkl'
@@ -56,9 +69,9 @@ get_summaryview_raw <- function(key, job, clusternum){
 #'
 #' get_summaryview_single(mykey, myjob, 1)
 #' }
-get_summaryview_single <- function(key, job, clusternum){
+get_summaryview_single <- function(key, job, clusternum, vortx_server="production"){
 
-  summaryview <- get_summaryview_raw(key, job, clusternum)
+  summaryview <- get_summaryview_raw(key, job, clusternum, vortx_server)
 
   options(scipen=999)
   view <- summaryview$vars
@@ -103,7 +116,9 @@ get_summaryview_single <- function(key, job, clusternum){
 #' @param job String or List. Can be either a job ID number
 #' in string format or parsed JSON in list format,
 #' result of organizer or discoverer functions.
+#' @param vortx_server Choose server to run Vortx. Can be one of "production", "sandbox", "local" or desired URL.
 #' @return List of DataFrames.
+#' @keywords internal
 #' @examples
 #' \dontrun{
 #' mykey <- '1234567890abcefghijkl'
@@ -116,10 +131,10 @@ get_summaryview_single <- function(key, job, clusternum){
 #'
 #' get_summaryview(mykey, myjob)
 #' }
-get_summaryview <- function(key, job){
+get_summaryview <- function(key, job, vortx_server="production"){
 
   # Get a list of clusters
-  hierarchy <- get_hierarchy(key, job)
+  hierarchy <- get_hierarchy(key, job, vortx_server)
   clusters <- as.character(hierarchy[-1,1])
 
   cluster_view <- list()

@@ -4,7 +4,8 @@
 \alias{start_organizer}
 \title{Start Organizer}
 \usage{
-start_organizer(key, job, ignoredcols = NULL)
+start_organizer(key, job, ignoredcols = NULL,
+  vortx_server = "production")
 }
 \arguments{
 \item{key}{String. User API Key for VORTX.}
@@ -14,6 +15,8 @@ in string format or parsed JSON in list format,
 result of organizer or discoverer functions.}
 
 \item{ignoredcols}{String or Vector of strings. Optional name of columns to be ignored. Default is NULL.}
+
+\item{vortx_server}{Choose server to run Vortx. Can be one of "production", "sandbox", "local" or desired URL.}
 }
 \value{
 Job. Parsed content of API request, containing job information, such as job ID, used in other functions.

@@ -4,10 +4,13 @@
 \alias{refine_mime}
 \title{Apply (mimes) changes from existent project in OpenRefine to R data}
 \usage{
-refine_mime(data, mime.name = NULL, mime.id = NULL)
+refine_mime(data, mime_name = NULL, mime_id = NULL,
+  base_url = "http://localhost:3333")
 }
 \arguments{
 \item{data}{DataFrame to be mimed}
+
+\item{base_url}{Base url for openrefine server}
 
 \item{mime.name}{String with name of project that contains the changes. Either name or ID must be given.}
 

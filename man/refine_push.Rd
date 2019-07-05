@@ -4,12 +4,14 @@
 \alias{refine_push}
 \title{Push data from R to OpenRefine}
 \usage{
-refine_push(data, name = NULL)
+refine_push(data, name = NULL, base_url = "http://localhost:3333")
 }
 \arguments{
 \item{data}{DataFrame to be uploaded}
 
 \item{name}{String. Name of project to be created. Default is NULL (Untitled)}
+
+\item{base_url}{Base url for openrefine server}
 }
 \description{
 Pushes data from R to OpenRefine as a CSV

@@ -15,5 +15,8 @@ Imports:
     httr,
     jsonlite,
     utils,
+    readxl,
     readr
-RoxygenNote: 6.0.1
+Suggests:
+    googlesheets
+RoxygenNote: 6.1.1

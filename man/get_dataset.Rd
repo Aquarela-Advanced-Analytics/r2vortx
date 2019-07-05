@@ -4,7 +4,7 @@
 \alias{get_dataset}
 \title{Get full dataset}
 \usage{
-get_dataset(key, job)
+get_dataset(key, job, vortx_server = "production")
 }
 \arguments{
 \item{key}{String. User API Key for VORTX.}
@@ -12,6 +12,8 @@ get_dataset(key, job)
 \item{job}{String or List. Can be either a job ID number
 in string format or parsed JSON in list format,
 result of organizer or discoverer functions.}
+
+\item{vortx_server}{Choose server to run Vortx. Can be one of "production", "sandbox", "local" or desired URL.}
 }
 \value{
 DataFrame of a job dataset

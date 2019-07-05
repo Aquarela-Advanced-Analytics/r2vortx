@@ -7,6 +7,7 @@
 #' in string format or parsed JSON in list format,
 #' result of organizer or discoverer functions.
 #' @param ignoredcols String or Vector of strings. Optional name of columns to be ignored. Default is NULL.
+#' @param vortx_server Choose server to run Vortx. Can be one of "production", "sandbox", "local" or desired URL.
 #' @return Job. Parsed content of API request, containing job information, such as job ID, used in other functions.
 #' @examples
 #' \dontrun{
@@ -20,13 +21,22 @@
 #'
 #' start_organizer(mykey, myjob, 'WhateverCol')
 #' }
-start_organizer <- function(key, job, ignoredcols=NULL){
+start_organizer <- function(key, job, ignoredcols=NULL, vortx_server="production"){
   # job can be either a list containing job data
   # or a character with jobid
 
   # Temporary data
   job_id <- get_job_id(job)
-  url <- 'https://api.vortx.io/jobs/start'
+  if (vortx_server == "production") {
+    host_url <- "https://api.vortx.io"
+  } else if (vortx_server == "sandbox") {
+    host_url <- "https://sandbox-api.vortx.io"
+  } else if (vortx_server == "local") {
+    host_url <- "http://localhost:8080"
+  } else {
+    host_url <- vortx_server
+  }
+  url <- paste0(host_url, "/jobs/start")
   job_body <- list(apikey = key,
                    jobid = job_id,
                    ignoredcols = get_col(ignoredcols))
@@ -50,11 +60,17 @@ start_organizer <- function(key, job, ignoredcols=NULL){
 #' Creates a job and runs Organizer
 #'
 #' @param key String. User API Key for VORTX.
-#' @param data DataFrame. Data to be created as a job.
+#' @param data Data to be created as a job. If no source is defined, it should be a DataFrame.
+#' If source is 'googlesheets', could be name, ID or any information that refers to it.
+#' If source is 'excel', it should be the path to file.
 #' @param jobname String. Title of job to be created.
 #' @param jobdesc String. Description of job to be created. Optional. Default NULL.
 #' @param ignoredcols String or Vector of strings. Optional name of columns to be ignored. Default is NULL.
 #' @param id Integer or String. This will be checked as possible ID. Default is 1.
+#' @param source String defining source. May contain 'excel' or 'googlesheets'. Default NULL for R.
+#' Use 'googlesheets_new' for new user.
+#' @param sheet String with number or name of sheet to be imported from source. Default NULL for first. Unnecessary for R.
+#' @param vortx_server Choose server to run Vortx. Can be one of "production", "sandbox", "local" or desired URL.
 #' @return Job. Parsed content of API request, containing job information, such as job ID, used in other functions.
 #' @export
 #' @examples
@@ -66,37 +82,30 @@ start_organizer <- function(key, job, ignoredcols=NULL){
 #'
 #' vortx_organizer(mykey, df, myjobname, myjobdesc, 'Ash')
 #' }
-vortx_organizer <- function(key, data, jobname, jobdesc=NULL, ignoredcols=NULL, id=1){
+vortx_organizer <- function(key, data, jobname, jobdesc=NULL, ignoredcols=NULL, id=1, source='r', sheet=NULL, vortx_server="production"){
+
+  # Check source
+  file <- get_source(data, source, sheet)
+
+  # Remove constant variables and add names to job description
+  # constant <- remove_constant(file)
+  # file <- constant[[1]]
+  # if (length(constant[[2]]) == 1){
+  #   jobdesc <- c(jobdesc, paste0(" Removed Constants: ", constant[[2]]))
+  # }
 
   # Make sure ID column is correct
-  data <- get_id_column(data, id)
+  file <- get_id_column(file, id)
 
-  # Check for possible IDish columns and/or columns with one value and ignore them
-  pos_ids <- c()
-  for(name in names(data)){
-    if(is_idish(data, name)){
-      pos_ids <- c(pos_ids, name)
-    }
-  }
-  if(length(pos_ids) >= 2){
-    ignoredcols <- c(ignoredcols, pos_ids[2:length(pos_ids)])
-  }
-
-  # Check for columns with one value and ignore them
-  useless_cols <- c()
-  for(name in names(data)){
-    if(length(table(data[[name]])) == 1){
-      useless_cols <- c(useless_cols, name)
-    }
-  }
-  if(length(useless_cols) >= 1){
-    ignoredcols <- c(ignoredcols, useless_cols)
-  }
+  # Get ignored columns
+  ignored <- get_ignored(file)
+  ignoredcols <- c(ignoredcols, ignored)
+  file <- rename_ignored(file, ignoredcols)
 
   # Create job and run organizer
-  job <- create_job(key, data, jobname, jobdesc)
+  job <- create_job(key, file, jobname, jobdesc, vortx_server)
   job_id <- get_job_id(job)
-  organizer <- start_organizer(key, job_id, ignoredcols)
+  organizer <- start_organizer(key=key, job=job_id, ignoredcols=NULL, vortx_server=vortx_server)
 
   return(organizer)
 }

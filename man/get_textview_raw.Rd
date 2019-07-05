@@ -4,7 +4,8 @@
 \alias{get_textview_raw}
 \title{Get Raw Textview}
 \usage{
-get_textview_raw(key, job, clusternum, start, end)
+get_textview_raw(key, job, clusternum, start, end,
+  vortx_server = "production")
 }
 \arguments{
 \item{key}{String. User API Key for VORTX.}
@@ -18,6 +19,8 @@ result of organizer or discoverer functions.}
 \item{start}{Integer. Starting row to get info from.}
 
 \item{end}{Integer. Ending row to get info from.}
+
+\item{vortx_server}{Choose server to run Vortx. Can be one of "production", "sandbox", "local" or desired URL.}
 }
 \value{
 List of parsed JSON.

@@ -5,12 +5,14 @@
 \title{Run Organizer from Scratch}
 \usage{
 vortx_organizer(key, data, jobname, jobdesc = NULL, ignoredcols = NULL,
-  id = 1)
+  id = 1, source = "r", sheet = NULL, vortx_server = "production")
 }
 \arguments{
 \item{key}{String. User API Key for VORTX.}
 
-\item{data}{DataFrame. Data to be created as a job.}
+\item{data}{Data to be created as a job. If no source is defined, it should be a DataFrame.
+If source is 'googlesheets', could be name, ID or any information that refers to it.
+If source is 'excel', it should be the path to file.}
 
 \item{jobname}{String. Title of job to be created.}
 
@@ -19,6 +21,13 @@ vortx_organizer(key, data, jobname, jobdesc = NULL, ignoredcols = NULL,
 \item{ignoredcols}{String or Vector of strings. Optional name of columns to be ignored. Default is NULL.}
 
 \item{id}{Integer or String. This will be checked as possible ID. Default is 1.}
+
+\item{source}{String defining source. May contain 'excel' or 'googlesheets'. Default NULL for R.
+Use 'googlesheets_new' for new user.}
+
+\item{sheet}{String with number or name of sheet to be imported from source. Default NULL for first. Unnecessary for R.}
+
+\item{vortx_server}{Choose server to run Vortx. Can be one of "production", "sandbox", "local" or desired URL.}
 }
 \value{
 Job. Parsed content of API request, containing job information, such as job ID, used in other functions.

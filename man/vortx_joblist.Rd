@@ -4,7 +4,8 @@
 \alias{vortx_joblist}
 \title{List jobs in VORTX}
 \usage{
-vortx_joblist(key, archived = "true", unarchived = "true")
+vortx_joblist(key, archived = "true", unarchived = "true",
+  vortx_server = "production")
 }
 \arguments{
 \item{key}{String. User API Key for VORTX.}
@@ -12,6 +13,8 @@ vortx_joblist(key, archived = "true", unarchived = "true")
 \item{archived}{String Shows archived jobs. Default: 'true'}
 
 \item{unarchived}{String Shows unarchived jobs. Default: 'true'}
+
+\item{vortx_server}{Choose server to run Vortx. Can be one of "production", "sandbox", "local" or desired URL.}
 }
 \value{
 DataFrame. Available jobs with their respective Job IDs, name and description.
