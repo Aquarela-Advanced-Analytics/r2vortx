@@ -4,12 +4,15 @@
 \alias{refine_kill}
 \title{Delete OpenRefine project}
 \usage{
-refine_kill(name = NULL, id = NULL)
+refine_kill(name = NULL, id = NULL,
+  base_url = "http://localhost:3333")
 }
 \arguments{
 \item{name}{String. Name of project in OpenRefine. Either name or ID must be given.}
 
 \item{id}{String. ID of project in OpenRefine. Obtainable by clicking 'About' in OpenRefine. Either name or ID must be given.}
+
+\item{base_url}{Base url for openrefine server}
 }
 \description{
 Kills project in OpenRefine

@@ -4,7 +4,10 @@
 \alias{refine_list}
 \title{Gets list of projects in OpenRefine}
 \usage{
-refine_list()
+refine_list(base_url = "http://localhost:3333")
+}
+\arguments{
+\item{base_url}{Base url for openrefine server}
 }
 \value{
 DataFrame with projects' ID, Name, Last Modified and Number of Rows

@@ -4,7 +4,8 @@
 \alias{start_organizer}
 \title{Start Organizer}
 \usage{
-start_organizer(key, job, ignoredcols = NULL, vortx_server = "production")
+start_organizer(key, job, ignoredcols = NULL,
+  vortx_server = "production")
 }
 \arguments{
 \item{key}{String. User API Key for VORTX.}

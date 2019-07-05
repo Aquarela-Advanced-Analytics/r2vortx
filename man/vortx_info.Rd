@@ -4,8 +4,8 @@
 \alias{vortx_info}
 \title{Get information}
 \usage{
-vortx_info(key, job, info = c("clusters", "varscores", "dataset", "summary"),
-  vortx_server = "production")
+vortx_info(key, job, info = c("clusters", "varscores", "dataset",
+  "summary"), vortx_server = "production")
 }
 \arguments{
 \item{key}{String. User API Key for VORTX.}

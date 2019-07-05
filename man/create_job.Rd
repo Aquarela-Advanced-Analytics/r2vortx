@@ -4,7 +4,8 @@
 \alias{create_job}
 \title{Create job}
 \usage{
-create_job(key, data, jobname, jobdesc = NULL, vortx_server = "production")
+create_job(key, data, jobname, jobdesc = NULL,
+  vortx_server = "production")
 }
 \arguments{
 \item{key}{String. User API Key for VORTX.}
